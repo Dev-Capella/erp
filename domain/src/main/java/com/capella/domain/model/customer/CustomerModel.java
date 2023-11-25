@@ -2,9 +2,11 @@ package com.capella.domain.model.customer;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name = "Customers")
+@Getter
 public class CustomerModel {
 
     @Id

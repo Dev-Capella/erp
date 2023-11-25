@@ -1,4 +1,4 @@
-package com.persistence.config;
+package com.capella.persistence.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

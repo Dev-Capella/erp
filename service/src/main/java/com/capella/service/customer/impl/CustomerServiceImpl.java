@@ -2,7 +2,7 @@ package com.capella.service.customer.impl;
 
 import com.capella.domain.model.customer.CustomerModel;
 import com.capella.service.customer.CustomerService;
-import com.persistence.dao.customer.CustomerDao;
+import com.capella.persistence.dao.customer.CustomerDao;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

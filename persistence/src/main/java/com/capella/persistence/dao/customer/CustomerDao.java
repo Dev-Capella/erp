@@ -1,4 +1,4 @@
-package com.persistence.dao.customer;
+package com.capella.persistence.dao.customer;
 
 import com.capella.domain.model.customer.CustomerModel;
 import org.springframework.data.jpa.repository.JpaRepository;
