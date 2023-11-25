@@ -13,7 +13,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerModel getCustomerByName(String name) {
-        var customer = customerDao.getByName(name);
+        var customer = customerDao.findByName(name);
         return customer;
     }
 }

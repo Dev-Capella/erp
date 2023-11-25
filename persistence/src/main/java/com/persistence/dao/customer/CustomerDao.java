@@ -4,5 +4,5 @@ import com.capella.domain.model.customer.CustomerModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerDao extends JpaRepository<CustomerModel,Long> {
-    CustomerModel getByName(String name);
+    CustomerModel findByName(String name);
 }
