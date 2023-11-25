@@ -1,6 +1,6 @@
 package com.capella.persistence.dao;
 
-import com.capella.domain.model.base.ItemModel;
+import com.capella.domain.model.extend.ItemModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

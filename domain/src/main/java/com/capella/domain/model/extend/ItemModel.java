@@ -1,11 +1,12 @@
-package com.capella.domain.model.base;
+package com.capella.domain.model.extend;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 import org.springframework.data.annotation.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import java.util.Objects;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @MappedSuperclass
+@FieldNameConstants
 public abstract class ItemModel implements Serializable{
 
     @Id

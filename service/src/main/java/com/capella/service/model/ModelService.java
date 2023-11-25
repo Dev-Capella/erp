@@ -1,6 +1,6 @@
 package com.capella.service.model;
 
-import com.capella.domain.model.base.ItemModel;
+import com.capella.domain.model.extend.ItemModel;
 
 public interface ModelService {
     <T extends ItemModel> T save(T t);
