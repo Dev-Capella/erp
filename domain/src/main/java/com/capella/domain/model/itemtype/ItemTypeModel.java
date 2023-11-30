@@ -24,8 +24,6 @@ public class ItemTypeModel extends CodeBasedModel {
     @Enumerated(EnumType.STRING)
     private Structer structer;
 
-    private String description;
-
     private Boolean sellingType;
 
     private Boolean valid;
@@ -34,4 +32,27 @@ public class ItemTypeModel extends CodeBasedModel {
 
     private Boolean handleComponentStatus;
 
+    private String longText;
+
+    private String shortText;
+
+    private String searchText;
+
+    private Boolean qualityControlled;
+
+    private Boolean lotControlled;
+
+    private Boolean containerControlled;
+
+    private Boolean elementControlled;
+
+    private Boolean projectControlled;
+
+    private Boolean statisticalGroupControlled;
+
+    private Boolean costForStatisticalGroupControlled;
+
+    private Boolean customerControlled;
+
+    private Boolean supplierControlled;
 }

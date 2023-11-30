@@ -9,6 +9,5 @@ import lombok.Getter;
 @Table(name = "UnitModel")
 @Getter
 public class UnitModel extends CodeBasedModel {
-
     private String description;
 }
