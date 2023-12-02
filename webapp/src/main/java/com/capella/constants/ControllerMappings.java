@@ -5,4 +5,5 @@ public interface ControllerMappings {
     String CODE = "/{code}";
     String ITEMTYPE = "/item-type";
     String UNITOFMEASURE = "/unit-of-measure";
+    String QUALITYLEVEL = "/quality-level";
 }

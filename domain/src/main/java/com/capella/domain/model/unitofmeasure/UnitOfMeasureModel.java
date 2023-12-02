@@ -12,7 +12,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "UnitOfMeasure")
 @Getter
-@Setter
 public class UnitOfMeasureModel extends CodeBasedModel {
 
     private String longText;
@@ -23,4 +22,21 @@ public class UnitOfMeasureModel extends CodeBasedModel {
 
     @Enumerated(EnumType.STRING)
     private UnitOfMeasureType unitOfMeasureType;
+
+
+    public void setLongText(String longText) {
+        this.longText = longText;
+    }
+
+    public void setShortText(String shortText) {
+        this.shortText = shortText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    public void setUnitOfMeasureType(UnitOfMeasureType unitOfMeasureType) {
+        this.unitOfMeasureType = unitOfMeasureType;
+    }
 }
