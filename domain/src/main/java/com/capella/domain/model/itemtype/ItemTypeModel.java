@@ -19,15 +19,6 @@ import java.util.Set;
 @Getter
 public class ItemTypeModel extends CodeBasedModel {
 
-    @Enumerated(EnumType.STRING)
-    private ItemNature itemNature;
-
-    @Enumerated(EnumType.STRING)
-    private StatusAllowed statusAllowed;
-
-    @Enumerated(EnumType.STRING)
-    private Structure structure;
-
     private Boolean sellingType;
 
     private Boolean valid;
@@ -60,17 +51,31 @@ public class ItemTypeModel extends CodeBasedModel {
 
     private Boolean supplierControlled;
 
-    @ManyToOne
-    private UnitOfMeasureModel primaryUOM;
-
-    private Boolean secondaryUnitControlled;
-
-    @ManyToOne
-    private UnitOfMeasureModel secondaryUOM;
-
     private BigDecimal secondaryConversionFactor;
 
     private Boolean packagingUnitControlled;
+
+    private Boolean secondaryUnitControlled;
+
+    private BigDecimal packagingConversionFactor;
+
+    @Enumerated(EnumType.STRING)
+    private BaseUoMPackagingType baseUoMPackagingType;
+
+    @Enumerated(EnumType.STRING)
+    private ItemNature itemNature;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAllowed statusAllowed;
+
+    @Enumerated(EnumType.STRING)
+    private Structure structure;
+
+    @ManyToOne
+    private UnitOfMeasureModel primaryUOM;
+
+    @ManyToOne
+    private UnitOfMeasureModel secondaryUOM;
 
     @OneToMany
     private Set<ItemSubCodeModel> itemSubCode;
@@ -78,9 +83,116 @@ public class ItemTypeModel extends CodeBasedModel {
     @OneToMany
     private Set<QualityLevelModel> qualityLevel;
 
-    @Enumerated(EnumType.STRING)
-    private BaseUoMPackagingType baseUoMPackagingType;
 
-    private BigDecimal packagingConversionFactor;
+    public void setSellingType(Boolean sellingType) {
+        this.sellingType = sellingType;
+    }
 
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+
+    public void setManagedByBox(Boolean managedByBox) {
+        this.managedByBox = managedByBox;
+    }
+
+    public void setHandleComponentStatus(Boolean handleComponentStatus) {
+        this.handleComponentStatus = handleComponentStatus;
+    }
+
+    public void setLongText(String longText) {
+        this.longText = longText;
+    }
+
+    public void setShortText(String shortText) {
+        this.shortText = shortText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    public void setQualityControlled(Boolean qualityControlled) {
+        this.qualityControlled = qualityControlled;
+    }
+
+    public void setLotControlled(Boolean lotControlled) {
+        this.lotControlled = lotControlled;
+    }
+
+    public void setContainerControlled(Boolean containerControlled) {
+        this.containerControlled = containerControlled;
+    }
+
+    public void setElementControlled(Boolean elementControlled) {
+        this.elementControlled = elementControlled;
+    }
+
+    public void setProjectControlled(Boolean projectControlled) {
+        this.projectControlled = projectControlled;
+    }
+
+    public void setStatisticalGroupControlled(Boolean statisticalGroupControlled) {
+        this.statisticalGroupControlled = statisticalGroupControlled;
+    }
+
+    public void setCostForStatisticalGroupControlled(Boolean costForStatisticalGroupControlled) {
+        this.costForStatisticalGroupControlled = costForStatisticalGroupControlled;
+    }
+
+    public void setCustomerControlled(Boolean customerControlled) {
+        this.customerControlled = customerControlled;
+    }
+
+    public void setSupplierControlled(Boolean supplierControlled) {
+        this.supplierControlled = supplierControlled;
+    }
+
+    public void setSecondaryConversionFactor(BigDecimal secondaryConversionFactor) {
+        this.secondaryConversionFactor = secondaryConversionFactor;
+    }
+
+    public void setPackagingUnitControlled(Boolean packagingUnitControlled) {
+        this.packagingUnitControlled = packagingUnitControlled;
+    }
+
+    public void setSecondaryUnitControlled(Boolean secondaryUnitControlled) {
+        this.secondaryUnitControlled = secondaryUnitControlled;
+    }
+
+    public void setPackagingConversionFactor(BigDecimal packagingConversionFactor) {
+        this.packagingConversionFactor = packagingConversionFactor;
+    }
+
+    public void setBaseUoMPackagingType(BaseUoMPackagingType baseUoMPackagingType) {
+        this.baseUoMPackagingType = baseUoMPackagingType;
+    }
+
+    public void setItemNature(ItemNature itemNature) {
+        this.itemNature = itemNature;
+    }
+
+    public void setStatusAllowed(StatusAllowed statusAllowed) {
+        this.statusAllowed = statusAllowed;
+    }
+
+    public void setStructure(Structure structure) {
+        this.structure = structure;
+    }
+
+    public void setPrimaryUOM(UnitOfMeasureModel primaryUOM) {
+        this.primaryUOM = primaryUOM;
+    }
+
+    public void setSecondaryUOM(UnitOfMeasureModel secondaryUOM) {
+        this.secondaryUOM = secondaryUOM;
+    }
+
+    public void setItemSubCode(Set<ItemSubCodeModel> itemSubCode) {
+        this.itemSubCode = itemSubCode;
+    }
+
+    public void setQualityLevel(Set<QualityLevelModel> qualityLevel) {
+        this.qualityLevel = qualityLevel;
+    }
 }

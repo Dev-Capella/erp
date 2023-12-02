@@ -18,13 +18,7 @@ public class ItemSubCodeModel extends CodeBasedModel {
 
     private int length;
 
-    @Enumerated(EnumType.STRING)
-    private ItemSubCodeType type;
-
     private Boolean mandatory;
-
-    @Enumerated(EnumType.STRING)
-    private ItemSubCodeDataType itemSubCodeDataType;
 
     private String longText;
 
@@ -37,5 +31,11 @@ public class ItemSubCodeModel extends CodeBasedModel {
     private Boolean wareHouseManagement;
 
     private Boolean excludedCostManagement;
+
+    @Enumerated(EnumType.STRING)
+    private ItemSubCodeDataType itemSubCodeDataType;
+
+    @Enumerated(EnumType.STRING)
+    private ItemSubCodeType type;
 
 }
