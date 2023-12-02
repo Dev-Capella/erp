@@ -1,6 +1,7 @@
 package com.capella.domain.data.itemsubcode;
 
 import com.capella.domain.data.base.BaseDescriptionData;
+import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.enums.ItemSubCodeDataType;
 import com.capella.domain.enums.ItemSubCodeType;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class ItemSubCodeData extends BaseDescriptionData {
     private Boolean excludedCostManagement;
     private ItemSubCodeDataType itemSubCodeDataType;
     private ItemSubCodeType type;
+    private ItemTypeData itemTypeData;
 }

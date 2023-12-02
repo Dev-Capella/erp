@@ -3,10 +3,8 @@ package com.capella.domain.model.itemsubcode;
 import com.capella.domain.enums.ItemSubCodeDataType;
 import com.capella.domain.enums.ItemSubCodeType;
 import com.capella.domain.model.extend.CodeBasedModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import com.capella.domain.model.itemtype.ItemTypeModel;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -38,4 +36,54 @@ public class ItemSubCodeModel extends CodeBasedModel {
     @Enumerated(EnumType.STRING)
     private ItemSubCodeType type;
 
+    @ManyToOne
+    private ItemTypeModel itemType;
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setMandatory(Boolean mandatory) {
+        this.mandatory = mandatory;
+    }
+
+    public void setLongText(String longText) {
+        this.longText = longText;
+    }
+
+    public void setShortText(String shortText) {
+        this.shortText = shortText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    public void setOutputSeparator(char outputSeparator) {
+        this.outputSeparator = outputSeparator;
+    }
+
+    public void setWareHouseManagement(Boolean wareHouseManagement) {
+        this.wareHouseManagement = wareHouseManagement;
+    }
+
+    public void setExcludedCostManagement(Boolean excludedCostManagement) {
+        this.excludedCostManagement = excludedCostManagement;
+    }
+
+    public void setItemSubCodeDataType(ItemSubCodeDataType itemSubCodeDataType) {
+        this.itemSubCodeDataType = itemSubCodeDataType;
+    }
+
+    public void setType(ItemSubCodeType type) {
+        this.type = type;
+    }
+
+    public void setItemType(ItemTypeModel itemType) {
+        this.itemType = itemType;
+    }
 }
