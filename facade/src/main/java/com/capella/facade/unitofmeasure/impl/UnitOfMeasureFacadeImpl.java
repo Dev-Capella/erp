@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Component
@@ -32,5 +33,23 @@ public class UnitOfMeasureFacadeImpl implements UnitOfMeasureFacade {
             modelMapper.map(unitOfMeasureData, unitOfMeasureModel);
         }
         modelService.save(unitOfMeasureModel);
+    }
+
+    @Override
+    public Set<UnitOfMeasureData> getAll() {
+        var unitOfMeasureModels = unitOfMeasureService.getUnitOfMeasureModels();
+        return Set.of(modelMapper.map(unitOfMeasureModels, UnitOfMeasureData[].class));
+    }
+
+    @Override
+    public UnitOfMeasureData get(String code) {
+        var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(code);
+        return modelMapper.map(unitOfMeasureModel,UnitOfMeasureData.class);
+    }
+
+    @Override
+    public void delete(String code) {
+        var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(code);
+        modelService.remove(unitOfMeasureModel);
     }
 }

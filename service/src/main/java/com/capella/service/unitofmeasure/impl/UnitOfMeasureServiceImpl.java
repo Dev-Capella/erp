@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -17,5 +19,11 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     public UnitOfMeasureModel getUnitOfMeasureModel(String code) {
         var unitOfMeasureModel = unitOfMeasureDao.getByCode(code);
         return unitOfMeasureModel;
+    }
+
+    @Override
+    public Set<UnitOfMeasureModel> getUnitOfMeasureModels() {
+        var unitOfMeasureModels = unitOfMeasureDao.getUnitOfMeasureModels();
+        return unitOfMeasureModels;
     }
 }
