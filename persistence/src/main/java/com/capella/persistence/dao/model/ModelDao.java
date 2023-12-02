@@ -1,4 +1,4 @@
-package com.capella.persistence.dao;
+package com.capella.persistence.dao.model;
 
 import com.capella.domain.model.extend.ItemModel;
 import jakarta.transaction.Transactional;

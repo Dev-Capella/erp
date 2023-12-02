@@ -1,5 +1,6 @@
-package com.capella.domain.model.qualityControl;
+package com.capella.domain.model.qualitycontrol;
 
+import com.capella.domain.model.extend.CodeBasedModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -7,7 +8,7 @@ import lombok.Getter;
 @Entity
 @Table(name = "QualityControl")
 @Getter
-public class QualityControlModel {
+public class QualityControlModel extends CodeBasedModel {
 
     private String label;
 

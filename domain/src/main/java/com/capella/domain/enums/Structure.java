@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Structer {
+public enum Structure {
     NA,
     FINISHED_ITEM,
     SEMI_FINISHED_ITEM,

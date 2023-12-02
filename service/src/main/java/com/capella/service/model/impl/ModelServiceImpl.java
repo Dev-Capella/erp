@@ -1,7 +1,7 @@
 package com.capella.service.model.impl;
 
 import com.capella.domain.model.extend.ItemModel;
-import com.capella.persistence.dao.ModelDao;
+import com.capella.persistence.dao.model.ModelDao;
 import com.capella.service.model.ModelService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

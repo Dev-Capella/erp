@@ -1,5 +1,6 @@
-package com.capella.domain.model.elementControl;
+package com.capella.domain.model.elementcontrol;
 
+import com.capella.domain.model.extend.CodeBasedModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -7,7 +8,7 @@ import lombok.Getter;
 @Entity
 @Table(name = "ElementControl")
 @Getter
-public class ElementControlModel {
+public class ElementControlModel extends CodeBasedModel {
 
     private String label;
 

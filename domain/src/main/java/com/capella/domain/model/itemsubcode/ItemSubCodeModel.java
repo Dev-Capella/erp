@@ -1,4 +1,4 @@
-package com.capella.domain.model.ItemSubCode;
+package com.capella.domain.model.itemsubcode;
 
 import com.capella.domain.enums.ItemSubCodeDataType;
 import com.capella.domain.enums.ItemSubCodeType;
@@ -36,6 +36,6 @@ public class ItemSubCodeModel extends CodeBasedModel {
 
     private Boolean wareHouseManagement;
 
-    private Boolean costManagement;
+    private Boolean excludedCostManagement;
 
 }

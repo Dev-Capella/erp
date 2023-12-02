@@ -1,14 +1,18 @@
 package com.capella.domain.model.itemtype;
 
+import com.capella.domain.enums.BaseUoMPackagingType;
 import com.capella.domain.enums.ItemNature;
 import com.capella.domain.enums.StatusAllowed;
-import com.capella.domain.enums.Structer;
+import com.capella.domain.enums.Structure;
+import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.extend.CodeBasedModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import com.capella.domain.model.qualitylevel.QualityLevelModel;
+import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
+import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "ItemType")
@@ -22,7 +26,7 @@ public class ItemTypeModel extends CodeBasedModel {
     private StatusAllowed statusAllowed;
 
     @Enumerated(EnumType.STRING)
-    private Structer structer;
+    private Structure structure;
 
     private Boolean sellingType;
 
@@ -55,4 +59,28 @@ public class ItemTypeModel extends CodeBasedModel {
     private Boolean customerControlled;
 
     private Boolean supplierControlled;
+
+    @ManyToOne
+    private UnitOfMeasureModel primaryUOM;
+
+    private Boolean secondaryUnitControlled;
+
+    @ManyToOne
+    private UnitOfMeasureModel secondaryUOM;
+
+    private BigDecimal secondaryConversionFactor;
+
+    private Boolean packagingUnitControlled;
+
+    @OneToMany
+    private Set<ItemSubCodeModel> itemSubCode;
+
+    @OneToMany
+    private Set<QualityLevelModel> qualityLevel;
+
+    @Enumerated(EnumType.STRING)
+    private BaseUoMPackagingType baseUoMPackagingType;
+
+    private BigDecimal packagingConversionFactor;
+
 }
