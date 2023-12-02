@@ -7,10 +7,12 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "UnitOfMeasure")
 @Getter
+@Setter
 public class UnitOfMeasureModel extends CodeBasedModel {
 
     private String longText;
