@@ -2,7 +2,6 @@ package com.capella.controller.v1.itemsubcode;
 
 import com.capella.constants.ControllerMappings;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
-import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.itemsubcode.ItemSubCodeFacade;
