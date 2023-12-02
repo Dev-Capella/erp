@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -23,7 +25,8 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
     @Override
     public Set<UnitOfMeasureModel> getUnitOfMeasureModels() {
-        var unitOfMeasureModels = unitOfMeasureDao.getUnitOfMeasureModels();
-        return unitOfMeasureModels;
+        List<UnitOfMeasureModel> unitOfMeasureModels = unitOfMeasureDao.findAll();
+        Set<UnitOfMeasureModel> unitOfMeasureModelSet = new HashSet<>(unitOfMeasureModels);
+        return unitOfMeasureModelSet;
     }
 }
