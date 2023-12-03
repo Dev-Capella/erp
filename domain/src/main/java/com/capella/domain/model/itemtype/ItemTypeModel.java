@@ -78,10 +78,10 @@ public class ItemTypeModel extends CodeBasedModel {
     private UnitOfMeasureModel secondaryUOM;
 
     @OneToMany
-    private Set<ItemSubCodeModel> itemSubCode;
+    private Set<ItemSubCodeModel> itemSubCodes;
 
     @OneToMany
-    private Set<QualityLevelModel> qualityLevel;
+    private Set<QualityLevelModel> qualityLevels;
 
 
     public void setSellingType(Boolean sellingType) {
@@ -189,10 +189,10 @@ public class ItemTypeModel extends CodeBasedModel {
     }
 
     public void setItemSubCode(Set<ItemSubCodeModel> itemSubCode) {
-        this.itemSubCode = itemSubCode;
+        this.itemSubCodes = itemSubCode;
     }
 
     public void setQualityLevel(Set<QualityLevelModel> qualityLevel) {
-        this.qualityLevel = qualityLevel;
+        this.qualityLevels = qualityLevel;
     }
 }

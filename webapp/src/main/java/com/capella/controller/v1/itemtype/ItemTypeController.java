@@ -53,4 +53,24 @@ public class ItemTypeController {
         response.setStatus(ProcessStatus.SUCCESS);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.ITEMSUBCODE)
+    public ServiceResponseData getItemSubCodesByItemType(@PathVariable String code){
+        log.info("Inside getItemSubCodesByItemType of ItemTypeController",code);
+        var itemTypeData = itemTypeFacade.getItemSubCodesByItemType(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(itemTypeData);
+        return response;
+    }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.QUALITYLEVEL)
+    public ServiceResponseData getQualityLevelsByItemType(@PathVariable String code){
+        log.info("Inside getQualityLevelsByItemType of ItemTypeController",code);
+        var itemTypeData = itemTypeFacade.getQualityLevelsByItemType(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(itemTypeData);
+        return response;
+    }
 }
