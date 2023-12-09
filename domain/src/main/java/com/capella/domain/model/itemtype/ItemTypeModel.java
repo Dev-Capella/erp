@@ -59,6 +59,8 @@ public class ItemTypeModel extends CodeBasedModel {
 
     private BigDecimal packagingConversionFactor;
 
+    private int maxCodeLength;
+
     @Enumerated(EnumType.STRING)
     private BaseUoMPackagingType baseUoMPackagingType;
 
@@ -71,11 +73,14 @@ public class ItemTypeModel extends CodeBasedModel {
     @Enumerated(EnumType.STRING)
     private Structure structure;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UnitOfMeasureModel primaryUOM;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UnitOfMeasureModel secondaryUOM;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UnitOfMeasureModel packagingUOM;
 
     @OneToMany
     private Set<ItemSubCodeModel> itemSubCodes;
@@ -164,6 +169,10 @@ public class ItemTypeModel extends CodeBasedModel {
         this.packagingConversionFactor = packagingConversionFactor;
     }
 
+    public void setMaxCodeLength(int maxCodeLength) {
+        this.maxCodeLength = maxCodeLength;
+    }
+
     public void setBaseUoMPackagingType(BaseUoMPackagingType baseUoMPackagingType) {
         this.baseUoMPackagingType = baseUoMPackagingType;
     }
@@ -186,6 +195,10 @@ public class ItemTypeModel extends CodeBasedModel {
 
     public void setSecondaryUOM(UnitOfMeasureModel secondaryUOM) {
         this.secondaryUOM = secondaryUOM;
+    }
+
+    public void setPackagingUOM(UnitOfMeasureModel packagingUOM) {
+        this.packagingUOM = packagingUOM;
     }
 
     public void setItemSubCode(Set<ItemSubCodeModel> itemSubCode) {

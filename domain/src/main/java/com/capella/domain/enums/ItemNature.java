@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ItemNature {
     PRODUCT,
-    NONSTOCKPRODUCT,
+    NON_STOCK_PRODUCT,
     TOOL,
     CONTAINER,
     SERVICES,

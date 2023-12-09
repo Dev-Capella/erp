@@ -9,5 +9,5 @@ public enum StatusAllowed {
     NA,
     ACTIVE,
     SUSPENDED_ACTIVE,
-    SUSPENDED_APPROWED_ACTIVE
+    SUSPENDED_APPROVED_ACTIVE
 }

@@ -29,6 +29,7 @@ public class ItemTypeData extends BaseDescriptionData {
     private Boolean supplierControlled;
     private Boolean packagingUnitControlled;
     private Boolean secondaryUnitControlled;
+    private int maxCodeLength;
     private BigDecimal secondaryConversionFactor;
     private BigDecimal packagingConversionFactor;
     private BaseUoMPackagingType baseUoMPackagingType;
@@ -37,4 +38,5 @@ public class ItemTypeData extends BaseDescriptionData {
     private Structure structure;
     private UnitOfMeasureData primaryUOM;
     private UnitOfMeasureData secondaryUOM;
+    private UnitOfMeasureData packagingUOM;
 }

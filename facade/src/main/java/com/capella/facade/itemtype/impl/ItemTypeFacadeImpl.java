@@ -42,7 +42,11 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
         }
         if(Objects.nonNull(itemTypeData.getSecondaryUOM())){
             var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getSecondaryUOM().getCode());
-            itemTypeModel.setPrimaryUOM(unitOfMeasureModel);
+            itemTypeModel.setSecondaryUOM(unitOfMeasureModel);
+        }
+        if(Objects.nonNull(itemTypeData.getPackagingUOM())){
+            var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPackagingUOM().getCode());
+            itemTypeModel.setPackagingUOM(unitOfMeasureModel);
         }
         modelService.save(itemTypeModel);
     }

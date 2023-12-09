@@ -9,5 +9,5 @@ public enum Structure {
     NA,
     FINISHED_ITEM,
     SEMI_FINISHED_ITEM,
-    ROW_MATERIAL
+    RAW_MATERIAL
 }
