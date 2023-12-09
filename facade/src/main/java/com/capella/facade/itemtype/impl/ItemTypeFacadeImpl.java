@@ -40,11 +40,11 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
             var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPrimaryUOM().getCode());
             itemTypeModel.setPrimaryUOM(unitOfMeasureModel);
         }
-        if(Objects.nonNull(itemTypeData.getSecondaryUOM())){
+        if(Objects.nonNull(itemTypeData.getSecondaryUOM()) && itemTypeData.getSecondaryUnitControlled()){
             var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getSecondaryUOM().getCode());
             itemTypeModel.setSecondaryUOM(unitOfMeasureModel);
         }
-        if(Objects.nonNull(itemTypeData.getPackagingUOM())){
+        if(Objects.nonNull(itemTypeData.getPackagingUOM()) && itemTypeData.getPackagingUnitControlled()){
             var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPackagingUOM().getCode());
             itemTypeModel.setPackagingUOM(unitOfMeasureModel);
         }
