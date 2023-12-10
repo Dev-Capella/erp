@@ -35,4 +35,14 @@ public class ItemSubCodeController {
         response.setStatus(ProcessStatus.SUCCESS);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE)
+    public ServiceResponseData get(@PathVariable String code){
+        log.info("Inside get of ItemSubCodeController",code);
+        var itemSubCodeData = itemSubCodeFacade.get(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(itemSubCodeData);
+        return response;
+    }
 }

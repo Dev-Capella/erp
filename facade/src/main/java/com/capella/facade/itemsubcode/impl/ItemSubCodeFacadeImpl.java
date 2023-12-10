@@ -1,6 +1,7 @@
 package com.capella.facade.itemsubcode.impl;
 
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
+import com.capella.domain.data.qualitylevel.QualityLevelData;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.facade.itemsubcode.ItemSubCodeFacade;
 import com.capella.service.itemsubcode.ItemSubCodeService;
@@ -33,7 +34,7 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
             itemSubCodeModel = itemSubCodeService.getItemSubCodeModel(itemSubCodeData.getCode());
             modelMapper.map(itemSubCodeData, itemSubCodeModel);
         }
-        itemSubCodeModel.setItemType(itemTypeService.getItemTypeModel(itemSubCodeData.getItemTypeData().getCode()));
+        itemSubCodeModel.setItemType(itemTypeService.getItemTypeModel(itemSubCodeData.getItemType().getCode()));
         modelService.save(itemSubCodeModel);
     }
 
@@ -41,5 +42,10 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
     public void delete(String code) {
         var itemSubCodeModel = itemSubCodeService.getItemSubCodeModel(code);
         modelService.remove(itemSubCodeModel);
+    }
+    @Override
+    public ItemSubCodeData get(String code) {
+        var itemSubCodeModel = itemSubCodeService.getItemSubCodeModel(code);
+        return modelMapper.map(itemSubCodeModel, ItemSubCodeData.class);
     }
 }

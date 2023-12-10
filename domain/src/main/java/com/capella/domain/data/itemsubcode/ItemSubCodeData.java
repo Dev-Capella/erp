@@ -18,5 +18,5 @@ public class ItemSubCodeData extends BaseDescriptionData {
     private Boolean excludedCostManagement;
     private ItemSubCodeDataType itemSubCodeDataType;
     private ItemSubCodeType type;
-    private ItemTypeData itemTypeData;
+    private ItemTypeData itemType;
 }
