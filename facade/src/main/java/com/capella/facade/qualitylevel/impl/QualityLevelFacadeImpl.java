@@ -1,6 +1,7 @@
 package com.capella.facade.qualitylevel.impl;
 
 import com.capella.domain.data.qualitylevel.QualityLevelData;
+import com.capella.domain.data.unitofmeasure.UnitOfMeasureData;
 import com.capella.domain.model.qualitylevel.QualityLevelModel;
 import com.capella.facade.qualitylevel.QualityLevelFacade;
 import com.capella.service.itemtype.ItemTypeService;
@@ -40,5 +41,11 @@ public class QualityLevelFacadeImpl implements QualityLevelFacade {
     public void delete(String code) {
         var qualityLevelModel = qualityLevelService.getQualityLevelModel(code);
         modelService.remove(qualityLevelModel);
+    }
+
+    @Override
+    public QualityLevelData get(String code) {
+        var qualityLevelModel = qualityLevelService.getQualityLevelModel(code);
+        return modelMapper.map(qualityLevelModel, QualityLevelData.class);
     }
 }

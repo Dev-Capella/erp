@@ -2,15 +2,15 @@ package com.capella.domain.model.qualitylevel;
 
 import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
 @Table(name = "QualityLevel")
 @Getter
 public class QualityLevelModel extends CodeBasedModel {
+
+    public static final String QUALITY_LEVEL_RELATION = "quality_level_id";
 
     private int level;
 
@@ -21,6 +21,8 @@ public class QualityLevelModel extends CodeBasedModel {
     private String searchText;
 
     @ManyToOne
+    @JoinTable(name="item_types_quality_levels",
+            joinColumns = @JoinColumn(name = QUALITY_LEVEL_RELATION), inverseJoinColumns = @JoinColumn(name = "item_type_id"))
     private ItemTypeModel itemType;
 
     public void setLevel(int level) {

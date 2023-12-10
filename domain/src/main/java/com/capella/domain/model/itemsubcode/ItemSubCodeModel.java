@@ -12,6 +12,8 @@ import lombok.Getter;
 @Getter
 public class ItemSubCodeModel extends CodeBasedModel {
 
+    public static final String ITEM_SUBCODE_RELATION = "item_subcode_id";
+
     private int position;
 
     private int length;
@@ -37,6 +39,8 @@ public class ItemSubCodeModel extends CodeBasedModel {
     private ItemSubCodeType type;
 
     @ManyToOne
+    @JoinTable(name="item_types_item_subcodes",
+            joinColumns = @JoinColumn(name = ITEM_SUBCODE_RELATION), inverseJoinColumns = @JoinColumn(name = "item_type_id"))
     private ItemTypeModel itemType;
 
     public void setPosition(int position) {

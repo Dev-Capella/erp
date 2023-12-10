@@ -36,4 +36,14 @@ public class QualityLevelController {
         return response;
     }
 
+    @GetMapping(ControllerMappings.CODE)
+    public ServiceResponseData get(@PathVariable String code){
+        log.info("Inside get of QualityLevelController",code);
+        var qualityLevelData = qualityLevelFacade.get(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(qualityLevelData);
+        return response;
+    }
+
 }

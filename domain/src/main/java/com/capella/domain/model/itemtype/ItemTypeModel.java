@@ -19,6 +19,8 @@ import java.util.Set;
 @Getter
 public class ItemTypeModel extends CodeBasedModel {
 
+    public static final String ITEM_TYPE_RELATION = "item_type_id";
+
     private Boolean sellingType;
 
     private Boolean valid;
@@ -83,9 +85,13 @@ public class ItemTypeModel extends CodeBasedModel {
     private UnitOfMeasureModel packagingUOM;
 
     @OneToMany
+    @JoinTable(name="item_types_item_subcodes",
+                joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "item_subcode_id"))
     private Set<ItemSubCodeModel> itemSubCodes;
 
     @OneToMany
+    @JoinTable(name="item_types_quality_levels",
+            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "quality_level_id"))
     private Set<QualityLevelModel> qualityLevels;
 
 
