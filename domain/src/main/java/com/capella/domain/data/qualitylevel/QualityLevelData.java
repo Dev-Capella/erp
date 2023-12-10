@@ -9,5 +9,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class QualityLevelData extends BaseDescriptionData {
     private int level;
-    private ItemTypeData itemTypeData;
+    private ItemTypeData itemType;
 }

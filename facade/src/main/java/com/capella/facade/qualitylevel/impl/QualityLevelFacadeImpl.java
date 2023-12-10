@@ -32,7 +32,7 @@ public class QualityLevelFacadeImpl implements QualityLevelFacade {
             qualityLevelModel = qualityLevelService.getQualityLevelModel(qualityLevelData.getCode());
             modelMapper.map(qualityLevelData, qualityLevelModel);
         }
-        qualityLevelModel.setItemType(itemTypeService.getItemTypeModel(qualityLevelData.getItemTypeData().getCode()));
+        qualityLevelModel.setItemType(itemTypeService.getItemTypeModel(qualityLevelData.getItemType().getCode()));
         modelService.save(qualityLevelModel);
     }
 
