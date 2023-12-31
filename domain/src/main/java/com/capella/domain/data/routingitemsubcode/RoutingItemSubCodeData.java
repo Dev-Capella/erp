@@ -10,5 +10,6 @@ import lombok.EqualsAndHashCode;
 public class RoutingItemSubCodeData extends BaseDescriptionData {
     private int position;
     private int length;
+    private char outputSeparator;
     private ItemTypeData itemType;
 }
