@@ -1,6 +1,8 @@
 package com.capella.facade.config;
 
+import com.capella.domain.data.compositiondetail.CompositionDetailData;
 import com.capella.domain.data.itemtype.ItemTypeData;
+import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
@@ -24,6 +26,13 @@ public class FacadeConfig {
                 skip(destination.getPrimaryUOM());
                 skip(destination.getSecondaryUOM());
                 skip(destination.getPackagingUOM());
+            }
+        });
+
+        modelMapper.addMappings(new PropertyMap<CompositionDetailData, CompositionDetailModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getCompositionComponent());
             }
         });
 

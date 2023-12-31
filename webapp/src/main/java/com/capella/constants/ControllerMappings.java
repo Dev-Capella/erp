@@ -8,10 +8,11 @@ public interface ControllerMappings {
     String QUALITYLEVEL = "/quality-level";
     String ITEMSUBCODE = "/item-sub-code";
     String USER = "/user";
-
     String BOMITEMSUBCODE = "/bom-item-sub-code";
     String ROUTINGITEMSUBCODE = "/routing-item-sub-code";
-
     String COSTCATEGORY = "/cost-category";
     String COSTLEVEL = "/cost-level";
+    String COMPOSITION = "/composition";
+    String COMPOSITIONCOMPONENT = "/composition-component";
+    String COMPOSITIONDETAIL = "/composition-detail";
 }
