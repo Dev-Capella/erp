@@ -7,4 +7,5 @@ public interface ControllerMappings {
     String UNITOFMEASURE = "/unit-of-measure";
     String QUALITYLEVEL = "/quality-level";
     String ITEMSUBCODE = "/item-sub-code";
+    String USER = "/user";
 }
