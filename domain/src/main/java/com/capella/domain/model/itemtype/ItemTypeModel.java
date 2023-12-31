@@ -4,9 +4,11 @@ import com.capella.domain.enums.BaseUoMPackagingType;
 import com.capella.domain.enums.ItemNature;
 import com.capella.domain.enums.StatusAllowed;
 import com.capella.domain.enums.Structure;
+import com.capella.domain.model.bomitemsubcode.BoMItemSubCodeModel;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.qualitylevel.QualityLevelModel;
+import com.capella.domain.model.routingitemsubcode.RoutingItemSubCodeModel;
 import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -94,6 +96,15 @@ public class ItemTypeModel extends CodeBasedModel {
             joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "quality_level_id"))
     private Set<QualityLevelModel> qualityLevels;
 
+    @OneToMany
+    @JoinTable(name="item_types_routing_item_subcodes",
+            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "routing_item_subcode_id"))
+    private Set<RoutingItemSubCodeModel> routingItemSubCodes;
+
+    @OneToMany
+    @JoinTable(name="item_types_bom_item_subcodes",
+            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "bom_item_subcode_id"))
+    private Set<BoMItemSubCodeModel> bomItemSubCodes;
 
     public void setSellingType(Boolean sellingType) {
         this.sellingType = sellingType;
@@ -213,5 +224,13 @@ public class ItemTypeModel extends CodeBasedModel {
 
     public void setQualityLevel(Set<QualityLevelModel> qualityLevel) {
         this.qualityLevels = qualityLevel;
+    }
+
+    public void setRoutingItemSubCodes(Set<RoutingItemSubCodeModel> routingItemSubCodes) {
+        this.routingItemSubCodes = routingItemSubCodes;
+    }
+
+    public void setBomItemSubCodes(Set<BoMItemSubCodeModel> bomItemSubCodes) {
+        this.bomItemSubCodes = bomItemSubCodes;
     }
 }
