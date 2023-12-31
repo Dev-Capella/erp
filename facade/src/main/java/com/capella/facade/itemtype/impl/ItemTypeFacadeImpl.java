@@ -1,8 +1,10 @@
 package com.capella.facade.itemtype.impl;
 
+import com.capella.domain.data.bomitemsubcode.BoMItemSubCodeData;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
 import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.qualitylevel.QualityLevelData;
+import com.capella.domain.data.routingitemsubcode.RoutingItemSubCodeData;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.facade.itemtype.ItemTypeFacade;
 import com.capella.service.itemtype.ItemTypeService;
@@ -80,5 +82,19 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
         var itemTypeModel = itemTypeService.getItemTypeModel(code);
         var qualityLevels = itemTypeModel.getQualityLevels();
         return Set.of(modelMapper.map(qualityLevels, QualityLevelData[].class));
+    }
+
+    @Override
+    public Set<RoutingItemSubCodeData> getRoutingItemSubCodesByItemType(String code) {
+        var itemTypeModel = itemTypeService.getItemTypeModel(code);
+        var routingItemSubCodes = itemTypeModel.getRoutingItemSubCodes();
+        return Set.of(modelMapper.map(routingItemSubCodes, RoutingItemSubCodeData[].class));
+    }
+
+    @Override
+    public Set<BoMItemSubCodeData> getBoMItemSubCodesByItemType(String code) {
+        var itemTypeModel = itemTypeService.getItemTypeModel(code);
+        var bomItemSubCodes = itemTypeModel.getBomItemSubCodes();
+        return Set.of(modelMapper.map(bomItemSubCodes, BoMItemSubCodeData[].class));
     }
 }

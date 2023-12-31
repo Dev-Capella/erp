@@ -73,4 +73,24 @@ public class ItemTypeController {
         response.setData(itemTypeData);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.BOMITEMSUBCODE)
+    public ServiceResponseData getBoMItemSubCodesByItemType(@PathVariable String code){
+        log.info("Inside getBoMItemSubCodesByItemType of ItemTypeController",code);
+        var itemTypeData = itemTypeFacade.getQualityLevelsByItemType(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(itemTypeData);
+        return response;
+    }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.ROUTINGITEMSUBCODE)
+    public ServiceResponseData getRoutingItemSubCodesByItemType(@PathVariable String code){
+        log.info("Inside getRoutingItemSubCodesByItemType of ItemTypeController",code);
+        var itemTypeData = itemTypeFacade.getQualityLevelsByItemType(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(itemTypeData);
+        return response;
+    }
 }

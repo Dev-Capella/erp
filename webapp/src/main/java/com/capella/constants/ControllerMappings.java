@@ -11,4 +11,7 @@ public interface ControllerMappings {
 
     String BOMITEMSUBCODE = "/bom-item-sub-code";
     String ROUTINGITEMSUBCODE = "/routing-item-sub-code";
+
+    String COSTCATEGORY = "/cost-category";
+    String COSTLEVEL = "/cost-level";
 }
