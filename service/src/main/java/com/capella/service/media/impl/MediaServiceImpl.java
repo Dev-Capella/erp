@@ -101,4 +101,10 @@ public class MediaServiceImpl implements MediaService {
         Set<MediaModel> mediaModelSet = new HashSet<>(mediaModels);
         return mediaModelSet;
     }
+
+    @Override
+    public MediaModel getMediaByCode(String code) {
+        var mediaModel = mediaDao.getByCode(code);
+        return mediaModel;
+    }
 }

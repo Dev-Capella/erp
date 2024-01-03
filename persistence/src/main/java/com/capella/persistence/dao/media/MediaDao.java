@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MediaDao extends JpaRepository<MediaModel, Long> {
     List<MediaModel> getByMediaCategory(MediaCategory mediaCategory);
+    MediaModel getByCode(String code);
 }
