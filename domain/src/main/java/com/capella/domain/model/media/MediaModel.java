@@ -1,7 +1,10 @@
 package com.capella.domain.model.media;
 
+import com.capella.domain.enums.MediaCategory;
 import com.capella.domain.model.extend.CodeBasedModel;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
@@ -23,6 +26,8 @@ public class MediaModel extends CodeBasedModel {
     private long size;
     private boolean secure;
     private boolean deleted;
+    @Enumerated(EnumType.STRING)
+    private MediaCategory mediaCategory;
 
     public void setRealFileName(String realFileName) {
         this.realFileName = realFileName;
@@ -66,5 +71,9 @@ public class MediaModel extends CodeBasedModel {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public void setMediaCategory(MediaCategory mediaCategory) {
+        this.mediaCategory = mediaCategory;
     }
 }

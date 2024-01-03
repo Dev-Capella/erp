@@ -16,4 +16,5 @@ public interface ControllerMappings {
     String COMPOSITIONCOMPONENT = "/composition-component";
     String COMPOSITIONDETAIL = "/composition-detail";
     String USERGENERICGROUP = "/user-generic-group";
+    String MEDIA = "/media";
 }
