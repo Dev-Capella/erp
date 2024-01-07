@@ -34,7 +34,7 @@ public class ManufacturerFacadeImpl implements ManufacturerFacade {
             manufacturerModel = manufacturerService.getManufacturerModel(manufacturerData.getCode());
             modelMapper.map(manufacturerData, manufacturerModel);
         }
-        MediaModel mediaModel = new MediaModel();
+        MediaModel mediaModel = null;
         if(Objects.nonNull(manufacturerData.getMedia())){
             mediaModel = mediaService.getMediaByCode(manufacturerData.getMedia().getCode());
         }

@@ -12,4 +12,5 @@ public interface MediaService {
     MediaModel storage(MultipartFile multipartFile, boolean secure, MediaCategory mediaCategory) throws IOException;
     Set<MediaModel> getMediasByMediaCategory(MediaCategory mediaCategory);
     MediaModel getMediaByCode(String code);
+    String generateMediaUrl(String url);
 }

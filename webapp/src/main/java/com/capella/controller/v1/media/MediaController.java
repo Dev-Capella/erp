@@ -23,7 +23,7 @@ public class MediaController {
 
     @PostMapping("/{mediaCategory}/upload")
     public ServiceResponseData save(
-                                    @Validated @RequestPart(value = "upload") MultipartFile file,
+                                    @Validated @RequestPart(value = "file") MultipartFile file,
                                     @Validated @PathVariable String mediaCategory) throws IOException {
         log.info("Inside save of MediaController",file);
         var category = MediaCategory.valueOf(mediaCategory.toUpperCase());

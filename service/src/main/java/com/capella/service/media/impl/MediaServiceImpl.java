@@ -107,4 +107,12 @@ public class MediaServiceImpl implements MediaService {
         var mediaModel = mediaDao.getByCode(code);
         return mediaModel;
     }
+
+    @Override
+    public String generateMediaUrl(String url) {
+        if(StringUtils.isNotEmpty(url)){
+            return StringUtils.join(mediaServePath, url);
+        }
+        return StringUtils.EMPTY;
+    }
 }
