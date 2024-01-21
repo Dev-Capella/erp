@@ -18,4 +18,5 @@ public interface ControllerMappings {
     String USERGENERICGROUP = "/user-generic-group";
     String MEDIA = "/media";
     String MANUFACTURER ="/manufacturer";
+    String PRODUCTIONGROUP ="/production-group";
 }

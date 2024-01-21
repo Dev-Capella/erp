@@ -3,9 +3,11 @@ package com.capella.facade.config;
 import com.capella.domain.data.compositiondetail.CompositionDetailData;
 import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.media.MediaData;
+import com.capella.domain.data.productiongroup.ProductionGroupData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.media.MediaModel;
+import com.capella.domain.model.productiongroup.ProductionGroupModel;
 import com.capella.service.media.MediaService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -45,6 +47,14 @@ public class FacadeConfig {
                 skip(destination.getCompositionComponent());
             }
         });
+
+        modelMapper.addMappings(new PropertyMap<ProductionGroupData, ProductionGroupModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getItemType());
+            }
+        });
+
         modelMapper.addMappings(new PropertyMap<MediaModel, MediaData>() {
             @Override
             protected void configure() {
