@@ -2,11 +2,15 @@ package com.capella.facade.config;
 
 import com.capella.domain.data.compositiondetail.CompositionDetailData;
 import com.capella.domain.data.itemtype.ItemTypeData;
+import com.capella.domain.data.manufacturer.ManufacturerData;
 import com.capella.domain.data.media.MediaData;
+import com.capella.domain.data.product.ProductData;
 import com.capella.domain.data.productiongroup.ProductionGroupData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
+import com.capella.domain.model.manufacturer.ManufacturerModel;
 import com.capella.domain.model.media.MediaModel;
+import com.capella.domain.model.product.ProductModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
 import com.capella.service.media.MediaService;
 import lombok.RequiredArgsConstructor;
@@ -40,17 +44,33 @@ public class FacadeConfig {
                 skip(destination.getPackagingUOM());
             }
         });
-
         modelMapper.addMappings(new PropertyMap<CompositionDetailData, CompositionDetailModel>() {
             @Override
             protected void configure() {
                 skip(destination.getCompositionComponent());
             }
         });
-
         modelMapper.addMappings(new PropertyMap<ProductionGroupData, ProductionGroupModel>() {
             @Override
             protected void configure() {
+                skip(destination.getItemType());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<ManufacturerData, ManufacturerModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getMedia());
+            }
+        });
+
+        modelMapper.addMappings(new PropertyMap<ProductData, ProductModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getManufacturer());
+                skip(destination.getCostCategory());
+                skip(destination.getCostLevel());
+                skip(destination.getProductionGroup());
+                skip(destination.getCompositionModel());
                 skip(destination.getItemType());
             }
         });
