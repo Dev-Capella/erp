@@ -19,4 +19,5 @@ public interface ControllerMappings {
     String MEDIA = "/media";
     String MANUFACTURER ="/manufacturer";
     String PRODUCTIONGROUP ="/production-group";
+    String PRODUCT ="/product";
 }
