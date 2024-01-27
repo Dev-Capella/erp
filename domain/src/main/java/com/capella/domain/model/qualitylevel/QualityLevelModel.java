@@ -20,7 +20,7 @@ public class QualityLevelModel extends CodeBasedModel {
 
     private String searchText;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name="item_types_quality_levels",
             joinColumns = @JoinColumn(name = QUALITY_LEVEL_RELATION), inverseJoinColumns = @JoinColumn(name = "item_type_id"))
     private ItemTypeModel itemType;

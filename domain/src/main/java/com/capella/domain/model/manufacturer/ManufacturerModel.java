@@ -3,6 +3,7 @@ package com.capella.domain.model.manufacturer;
 import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.media.MediaModel;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class ManufacturerModel extends CodeBasedModel {
     private String shortText;
     private String searchText;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private MediaModel media;
 
     public void setName(String name) {

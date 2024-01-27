@@ -18,7 +18,7 @@ public class BoMItemSubCodeModel extends CodeBasedModel {
     private String shortText;
     private String searchText;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name="item_types_bom_item_subcodes",
             joinColumns = @JoinColumn(name = BoM_ITEM_SUBCODE_RELATION), inverseJoinColumns = @JoinColumn(name = "item_type_id"))
     private ItemTypeModel itemType;

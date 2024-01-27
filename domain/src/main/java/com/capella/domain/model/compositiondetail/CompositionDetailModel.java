@@ -27,7 +27,7 @@ public class CompositionDetailModel extends CodeBasedModel {
     private String shortText;
     private String searchText;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name="compositions_composition_details",
             joinColumns = @JoinColumn(name = COMPOSITION_DETAIL_RELATION), inverseJoinColumns = @JoinColumn(name = "composition_id"))
     private CompositionModel composition;

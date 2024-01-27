@@ -38,7 +38,7 @@ public class ItemSubCodeModel extends CodeBasedModel {
     @Enumerated(EnumType.STRING)
     private ItemSubCodeType type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name="item_types_item_subcodes",
             joinColumns = @JoinColumn(name = ITEM_SUBCODE_RELATION), inverseJoinColumns = @JoinColumn(name = "item_type_id"))
     private ItemTypeModel itemType;
