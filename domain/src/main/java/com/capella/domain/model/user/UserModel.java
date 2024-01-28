@@ -1,16 +1,19 @@
 package com.capella.domain.model.user;
 
 import com.capella.domain.model.extend.ItemModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.capella.domain.model.userrole.UserRoleModel;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
 @Getter
 public class UserModel extends ItemModel {
-
+    public static final String USER_RELATION = "user_id";
     @EqualsAndHashCode.Include
     private String username;
 
@@ -19,6 +22,12 @@ public class UserModel extends ItemModel {
     private String password;
     private String email;
     private String phoneNumber;
+    private Date lastLoginDate;
+
+    @ManyToMany
+    @JoinTable(name ="users_user_roles",
+            joinColumns = @JoinColumn(name = USER_RELATION), inverseJoinColumns = @JoinColumn(name = "user_role_id"))
+    private Set<UserRoleModel> userRoles;
 
     public void setUsername(String username) {
         this.username = username;
@@ -42,5 +51,13 @@ public class UserModel extends ItemModel {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public void setUserRoles(Set<UserRoleModel> userRoles) {
+        this.userRoles = userRoles;
     }
 }
