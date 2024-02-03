@@ -13,9 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 @Qualifier("erpUserService")
@@ -28,6 +26,13 @@ public class UserServiceImpl implements UserService {
     public UserModel getUserModel(String username) {
         var userModel = userDao.getByUsername(username);
         return userModel;
+    }
+
+    @Override
+    public Set<UserModel> getUserModels() {
+        List<UserModel> userModels = userDao.findAll();
+        Set<UserModel> userModelSet = new HashSet<>(userModels);
+        return userModelSet;
     }
 
     @Override

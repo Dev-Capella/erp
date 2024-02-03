@@ -24,6 +24,9 @@ public class UserModel extends ItemModel {
     private String phoneNumber;
     private Date lastLoginDate;
 
+    @Transient
+    private String definedPassword;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name ="users_user_roles",
             joinColumns = @JoinColumn(name = USER_RELATION), inverseJoinColumns = @JoinColumn(name = "user_role_id"))
@@ -59,5 +62,9 @@ public class UserModel extends ItemModel {
 
     public void setUserRoles(Set<UserRoleModel> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public void setDefinedPassword(String definedPassword) {
+        this.definedPassword = definedPassword;
     }
 }

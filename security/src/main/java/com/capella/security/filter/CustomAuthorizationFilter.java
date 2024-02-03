@@ -63,6 +63,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getServletPath().contains("/login") || (StringUtils.isNotEmpty(request.getServletPath()));
+        return request.getServletPath().contains("/login");
     }
 }
