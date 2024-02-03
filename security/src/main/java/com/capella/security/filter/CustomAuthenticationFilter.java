@@ -85,8 +85,12 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         var algorithm = Algorithm.HMAC256(secretKey.getBytes());
         var jwtId = UUID.randomUUID().toString();
 
+        var userModel = userService.getUserModel(user.getUsername());
+
         var accessToken = JWT.create()
                 .withSubject(user.getUsername())
+                .withClaim("firstName", userModel.getFirstName())
+                .withClaim("lastName", userModel.getLastName())
                 .withExpiresAt(DateUtils.addMinutes(new Date(), accessTokenExpire))
                 .withIssuer(issuer)
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
@@ -100,7 +104,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withJWTId(jwtId)
                 .sign(algorithm);
 
-        var userModel = userService.getUserModel(user.getUsername());
+
 
         if (Objects.nonNull(userModel)) {
             userModel.setLastLoginDate(new Date());
