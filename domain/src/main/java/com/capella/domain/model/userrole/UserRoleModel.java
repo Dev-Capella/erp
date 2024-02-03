@@ -20,7 +20,7 @@ public class UserRoleModel extends CodeBasedModel {
     private String shortText;
     private String searchText;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name ="user_roles_permissions",
             joinColumns = @JoinColumn(name = USER_ROLE_RELATION), inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<PermissionModel> permissions;

@@ -24,7 +24,7 @@ public class UserModel extends ItemModel {
     private String phoneNumber;
     private Date lastLoginDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name ="users_user_roles",
             joinColumns = @JoinColumn(name = USER_RELATION), inverseJoinColumns = @JoinColumn(name = "user_role_id"))
     private Set<UserRoleModel> userRoles;

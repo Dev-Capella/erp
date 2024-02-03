@@ -121,6 +121,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         userAuditModel.setClientInfo(clientInfo);
         userAuditModel.setCreatedDate(new Date());
         userAuditModel.setCreatedBy(SYSTEM);
+        userAuditModel.setLastModifiedBy(SYSTEM);
         modelService.save(userAuditModel);
     }
 
@@ -149,6 +150,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             userAuditModel.setClientInfo(clientInfo);
             userAuditModel.setCreatedDate(new Date());
             userAuditModel.setCreatedBy(SYSTEM);
+            modelService.save(userAuditModel);
         } catch (Exception exception) {
             log.error("userAudit saving error with username" + username);
         }
