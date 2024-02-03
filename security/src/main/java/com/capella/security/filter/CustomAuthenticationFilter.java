@@ -136,7 +136,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         var mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.writeValue(response.getOutputStream(), serviceResponseData);
-        var ip = request.getRemoteAddr();
+        var ip = request.getHeader("x-real-ip");
         var clientInfo = request.getHeader("User-Agent");
         var username = loginRequest.getUsername();
         try {
