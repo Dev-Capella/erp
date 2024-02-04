@@ -75,7 +75,7 @@ public class MenuFacadeImpl implements MenuFacade {
         Arrays.stream(menuDatas).forEach(m -> {
             var treeNodeData = new TreeNodeData();
             treeNodeData.setLabel(m.getShortText());
-            treeNodeData.setData(m.getLongText());
+            treeNodeData.setData(m.getCode());
             treeNodeData.setChildren(setChildren(m));
             treeNodeDatas.add(treeNodeData);
         });
@@ -89,7 +89,7 @@ public class MenuFacadeImpl implements MenuFacade {
             for (MenuData m : menuData.getItems()){
                 var treeNodeData = new TreeNodeData();
                 treeNodeData.setLabel(m.getShortText());
-                treeNodeData.setData(m.getLongText());
+                treeNodeData.setData(m.getCode());
                 treeNodeData.setChildren(setChildren(m));
                 treeNodeDatas.add(treeNodeData);
             }
