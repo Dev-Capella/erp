@@ -23,4 +23,5 @@ public interface ControllerMappings {
     String PRODUCT ="/product";
     String USERROLE ="/user-role";
     String PERMISSION ="/permission";
+    String MENU = "/menu";
 }

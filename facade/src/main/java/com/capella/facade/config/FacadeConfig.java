@@ -4,12 +4,14 @@ import com.capella.domain.data.compositiondetail.CompositionDetailData;
 import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.manufacturer.ManufacturerData;
 import com.capella.domain.data.media.MediaData;
+import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.product.ProductData;
 import com.capella.domain.data.productiongroup.ProductionGroupData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.manufacturer.ManufacturerModel;
 import com.capella.domain.model.media.MediaModel;
+import com.capella.domain.model.menu.MenuModel;
 import com.capella.domain.model.product.ProductModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
 import com.capella.service.media.MediaService;
@@ -72,6 +74,14 @@ public class FacadeConfig {
                 skip(destination.getProductionGroup());
                 skip(destination.getCompositionModel());
                 skip(destination.getItemType());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<MenuData, MenuModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getParent());
+                skip(destination.getPermissions());
+                skip(destination.getItems());
             }
         });
 

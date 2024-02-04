@@ -7,7 +7,6 @@ import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.permission.PermissionFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 @RestController("permissionControllerV1")
@@ -35,7 +34,6 @@ public class PermissionController {
         return response;
     }
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('item_type_read')")
     public ServiceResponseData getAll(){
         log.info("Inside getAll of PermissionController");
         var permissionDatas = permissionFacade.getAll();
