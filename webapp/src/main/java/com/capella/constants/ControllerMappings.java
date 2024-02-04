@@ -22,4 +22,5 @@ public interface ControllerMappings {
     String PRODUCTIONGROUP ="/production-group";
     String PRODUCT ="/product";
     String USERROLE ="/user-role";
+    String PERMISSION ="/permission";
 }
