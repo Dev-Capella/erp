@@ -2,6 +2,7 @@ package com.capella.facade.menu.impl;
 
 import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.menu.MenuSummaryData;
+import com.capella.domain.data.treenode.TreeNodeData;
 import com.capella.domain.model.menu.MenuModel;
 import com.capella.domain.model.permission.PermissionModel;
 import com.capella.facade.menu.MenuFacade;
@@ -28,23 +29,23 @@ public class MenuFacadeImpl implements MenuFacade {
     @Override
     public void save(MenuData menuData) {
         MenuModel menuModel;
-        if(menuData.isNew()){
+        if (menuData.isNew()) {
             menuModel = modelMapper.map(menuData, MenuModel.class);
             menuModel.setCode(UUID.randomUUID().toString());
-        }else{
+        } else {
             menuModel = menuService.getMenuModel(menuData.getCode());
             modelMapper.map(menuData, menuModel);
         }
 
         Set<PermissionModel> permissions = new HashSet<>();
-        if(CollectionUtils.isNotEmpty(menuData.getPermissions())){
+        if (CollectionUtils.isNotEmpty(menuData.getPermissions())) {
             menuData.getPermissions().forEach(p ->
                     permissions.add(permissionService.getPermissionModel(p.getCode())));
         }
         menuModel.setPermissions(permissions);
 
         MenuModel parent = null;
-        if(Objects.nonNull(menuData.getParent())){
+        if (Objects.nonNull(menuData.getParent())) {
             parent = menuService.getMenuModel(menuData.getParent().getCode());
         }
         menuModel.setParent(parent);
@@ -63,5 +64,36 @@ public class MenuFacadeImpl implements MenuFacade {
         var menuModel = menuService.getMenuModel(code);
         var menuItems = menuModel.getItems();
         return List.of(modelMapper.map(menuItems, MenuSummaryData[].class));
+    }
+
+    @Override
+    public List<TreeNodeData> getMenusForTreeNode() {
+        var menus = menuService.getMenusByRoot();
+        var menuDatas = modelMapper.map(menus, MenuData[].class);
+
+        var treeNodeDatas = new ArrayList<TreeNodeData>();
+        Arrays.stream(menuDatas).forEach(m -> {
+            var treeNodeData = new TreeNodeData();
+            treeNodeData.setLabel(m.getShortText());
+            treeNodeData.setData(m.getLongText());
+            treeNodeData.setChildren(setChildren(m));
+            treeNodeDatas.add(treeNodeData);
+        });
+
+        return treeNodeDatas;
+    }
+
+    private List<TreeNodeData> setChildren(MenuData menuData){
+        var treeNodeDatas = new ArrayList<TreeNodeData>();
+        if(CollectionUtils.isNotEmpty(menuData.getItems())){
+            for (MenuData m : menuData.getItems()){
+                var treeNodeData = new TreeNodeData();
+                treeNodeData.setLabel(m.getShortText());
+                treeNodeData.setData(m.getLongText());
+                treeNodeData.setChildren(setChildren(m));
+                treeNodeDatas.add(treeNodeData);
+            }
+        }
+        return treeNodeDatas;
     }
 }

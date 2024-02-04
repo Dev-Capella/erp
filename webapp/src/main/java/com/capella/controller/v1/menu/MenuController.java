@@ -49,4 +49,15 @@ public class MenuController {
         response.setData(menuItems);
         return response;
     }
+
+    @GetMapping("/tree-node")
+    @PreAuthorize("hasAnyAuthority('Menu_Read')")
+    public ServiceResponseData getMenusForTreeNode(){
+        log.info("Inside getMenusForTreeNode of MenuController");
+        var menus = menuFacade.getMenusForTreeNode();
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(menus);
+        return response;
+    }
 }
