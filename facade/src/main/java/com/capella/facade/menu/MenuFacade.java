@@ -11,4 +11,5 @@ public interface MenuFacade {
     List<MenuSummaryData> getMenusByRoot();
     List<MenuSummaryData> getMenuItemsByCode(String code);
     List<TreeNodeData> getMenusForTreeNode();
+    MenuData get(String code);
 }

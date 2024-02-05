@@ -5,10 +5,12 @@ import com.capella.domain.data.menu.MenuSummaryData;
 import com.capella.domain.data.treenode.TreeNodeData;
 import com.capella.domain.model.menu.MenuModel;
 import com.capella.domain.model.permission.PermissionModel;
+import com.capella.domain.model.userrole.UserRoleModel;
 import com.capella.facade.menu.MenuFacade;
 import com.capella.service.menu.MenuService;
 import com.capella.service.model.ModelService;
 import com.capella.service.permission.PermissionService;
+import com.capella.service.userrole.UserRoleService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -25,7 +27,7 @@ public class MenuFacadeImpl implements MenuFacade {
     protected final ModelService modelService;
     protected final MenuService menuService;
     protected final PermissionService permissionService;
-
+    protected final UserRoleService userRoleService;
     @Override
     public void save(MenuData menuData) {
         MenuModel menuModel;
@@ -43,6 +45,13 @@ public class MenuFacadeImpl implements MenuFacade {
                     permissions.add(permissionService.getPermissionModel(p.getCode())));
         }
         menuModel.setPermissions(permissions);
+
+        Set<UserRoleModel> userRoles = new HashSet<>();
+        if (CollectionUtils.isNotEmpty(menuData.getUserRoles())) {
+            menuData.getUserRoles().forEach(p ->
+                    userRoles.add(userRoleService.getUserRoleModel(p.getCode())));
+        }
+        menuModel.setUserRoles(userRoles);
 
         MenuModel parent = null;
         if (Objects.nonNull(menuData.getParent())) {
@@ -75,12 +84,19 @@ public class MenuFacadeImpl implements MenuFacade {
         Arrays.stream(menuDatas).forEach(m -> {
             var treeNodeData = new TreeNodeData();
             treeNodeData.setLabel(m.getShortText());
-            treeNodeData.setData(m.getCode());
+            treeNodeData.setData(m.getLongText());
+            treeNodeData.setKey(m.getCode());
             treeNodeData.setChildren(setChildren(m));
             treeNodeDatas.add(treeNodeData);
         });
 
         return treeNodeDatas;
+    }
+
+    @Override
+    public MenuData get(String code) {
+        var menuModel = menuService.getMenuModel(code);
+        return modelMapper.map(menuModel, MenuData.class);
     }
 
     private List<TreeNodeData> setChildren(MenuData menuData){
@@ -89,7 +105,8 @@ public class MenuFacadeImpl implements MenuFacade {
             for (MenuData m : menuData.getItems()){
                 var treeNodeData = new TreeNodeData();
                 treeNodeData.setLabel(m.getShortText());
-                treeNodeData.setData(m.getCode());
+                treeNodeData.setData(m.getLongText());
+                treeNodeData.setKey(m.getCode());
                 treeNodeData.setChildren(setChildren(m));
                 treeNodeDatas.add(treeNodeData);
             }

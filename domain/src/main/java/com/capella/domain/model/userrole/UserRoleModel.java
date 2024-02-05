@@ -2,16 +2,19 @@ package com.capella.domain.model.userrole;
 
 import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.model.extend.CodeBasedModel;
+import com.capella.domain.model.menu.MenuModel;
 import com.capella.domain.model.permission.PermissionModel;
 import com.capella.domain.model.user.UserModel;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = DomainConstant.USERROLE_TABLE_NAME)
 @Getter
+@Setter
 public class UserRoleModel extends CodeBasedModel {
 
     public static final String USER_ROLE_RELATION = "user_role_id";
@@ -30,22 +33,9 @@ public class UserRoleModel extends CodeBasedModel {
             joinColumns = @JoinColumn(name = USER_ROLE_RELATION), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<UserModel> users;
 
-    public void setLongText(String longText) {
-        this.longText = longText;
-    }
+    @ManyToMany
+    @JoinTable(name ="menus_user_roles",
+            joinColumns = @JoinColumn(name = USER_ROLE_RELATION), inverseJoinColumns = @JoinColumn(name = MenuModel.MENU_RELATION))
+    private Set<MenuModel> menus;
 
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public void setUsers(Set<UserModel> users) {
-        this.users = users;
-    }
-    public void setPermissions(Set<PermissionModel> permissions) {
-        this.permissions = permissions;
-    }
 }

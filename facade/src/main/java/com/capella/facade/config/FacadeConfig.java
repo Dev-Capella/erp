@@ -81,6 +81,7 @@ public class FacadeConfig {
             protected void configure() {
                 skip(destination.getParent());
                 skip(destination.getPermissions());
+                skip(destination.getUserRoles());
                 skip(destination.getItems());
             }
         });

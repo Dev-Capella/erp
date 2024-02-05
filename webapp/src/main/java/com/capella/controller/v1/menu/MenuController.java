@@ -28,6 +28,17 @@ public class MenuController {
         return response;
     }
 
+    @GetMapping(ControllerMappings.CODE)
+    @PreAuthorize("hasAnyAuthority('Menu_Read')")
+    public ServiceResponseData get(@PathVariable String code){
+        log.info("Inside get of MenuController",code);
+        var menuData = menuFacade.get(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(menuData);
+        return response;
+    }
+
     @GetMapping("/roots")
     @PreAuthorize("hasAnyAuthority('Menu_Read')")
     public ServiceResponseData getMenusByRoot(){
@@ -39,7 +50,7 @@ public class MenuController {
         return response;
     }
 
-    @GetMapping(ControllerMappings.CODE)
+    @GetMapping(ControllerMappings.CODE + "/items")
     @PreAuthorize("hasAnyAuthority('Menu_Read')")
     public ServiceResponseData getMenuItemsByCode(@PathVariable String code){
         log.info("Inside getMenuItemsByCode of MenuController", code);
