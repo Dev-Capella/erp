@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -107,6 +108,7 @@ public class MenuFacadeImpl implements MenuFacade {
     }
 
     @Override
+    @Cacheable(value = "currentUserMenusCache", key = "JWTIDKeyGenerator")
     public List<AppMenuData> getCurrentUserMenus() {
         var menus = menuService.getCurrentUserMenus();
         var menuDatas = modelMapper.map(menus, MenuData[].class);

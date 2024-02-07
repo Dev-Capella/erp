@@ -1,11 +1,13 @@
 package com.capella.service.user.impl;
 import com.capella.base.util.ErpWebUtils;
 import com.capella.domain.data.login.LoginRequestData;
+import com.capella.domain.data.user.JwtUserData;
 import com.capella.domain.model.user.UserModel;
 import com.capella.persistence.dao.user.UserDao;
 import com.capella.service.user.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,6 +44,16 @@ public class UserServiceImpl implements UserService {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         var username = String.valueOf(authentication.getPrincipal());
         return this.getUserModel(username);
+    }
+
+    @Override
+    public String getCurrentUserJWTId() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if(Objects.nonNull(auth)){
+            var jwtUserData = (JwtUserData) auth.getDetails();
+            return jwtUserData.getJwtId();
+        }
+        return StringUtils.EMPTY;
     }
 
     @Override
