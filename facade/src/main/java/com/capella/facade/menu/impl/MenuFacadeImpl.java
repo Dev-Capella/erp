@@ -99,6 +99,12 @@ public class MenuFacadeImpl implements MenuFacade {
         return modelMapper.map(menuModel, MenuData.class);
     }
 
+    @Override
+    public void delete(String code) {
+        var menuModel = menuService.getMenuModel(code);
+        modelService.remove(menuModel);
+    }
+
     private List<TreeNodeData> setChildren(MenuData menuData){
         var treeNodeDatas = new ArrayList<TreeNodeData>();
         if(CollectionUtils.isNotEmpty(menuData.getItems())){

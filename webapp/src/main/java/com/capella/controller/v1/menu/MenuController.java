@@ -71,4 +71,14 @@ public class MenuController {
         response.setData(menus);
         return response;
     }
+
+    @DeleteMapping(ControllerMappings.CODE)
+    @PreAuthorize("hasAnyAuthority('Menu_Remove')")
+    public ServiceResponseData delete(@PathVariable String code){
+        log.info("Inside delete of MenuController",code);
+        menuFacade.delete(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        return response;
+    }
 }
