@@ -13,4 +13,5 @@ public interface MenuFacade {
     List<TreeNodeData> getMenusForTreeNode();
     MenuData get(String code);
     void delete(String code);
+    List<MenuData> getCurrentUserMenus();
 }

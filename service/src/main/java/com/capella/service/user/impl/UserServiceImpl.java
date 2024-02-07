@@ -8,11 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Security;
 import java.util.*;
 
 @Service
@@ -33,6 +35,13 @@ public class UserServiceImpl implements UserService {
         List<UserModel> userModels = userDao.findAll();
         Set<UserModel> userModelSet = new HashSet<>(userModels);
         return userModelSet;
+    }
+
+    @Override
+    public UserModel getCurrentUser() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var username = String.valueOf(authentication.getPrincipal());
+        return this.getUserModel(username);
     }
 
     @Override

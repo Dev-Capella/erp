@@ -105,6 +105,13 @@ public class MenuFacadeImpl implements MenuFacade {
         modelService.remove(menuModel);
     }
 
+    @Override
+    public List<MenuData> getCurrentUserMenus() {
+        var menus = menuService.getCurrentUserMenus();
+        return List.of(modelMapper.map(menus, MenuData[].class));
+
+    }
+
     private List<TreeNodeData> setChildren(MenuData menuData){
         var treeNodeDatas = new ArrayList<TreeNodeData>();
         if(CollectionUtils.isNotEmpty(menuData.getItems())){

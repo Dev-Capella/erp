@@ -8,4 +8,5 @@ import java.util.Set;
 public interface UserService extends UserDetailsService {
     UserModel getUserModel(String username);
     Set<UserModel> getUserModels();
+    UserModel getCurrentUser();
 }

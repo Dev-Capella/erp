@@ -81,4 +81,15 @@ public class MenuController {
         response.setStatus(ProcessStatus.SUCCESS);
         return response;
     }
+
+    @GetMapping("/current-user")
+    @PreAuthorize("hasAnyAuthority('Menu_Read')")
+    public ServiceResponseData getCurrentUserMenus(){
+        log.info("Inside getCurrentUserMenus of MenuController");
+        var currentUserMenus = menuFacade.getCurrentUserMenus();
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(currentUserMenus);
+        return response;
+    }
 }
