@@ -1,5 +1,6 @@
 package com.capella.facade.menu;
 
+import com.capella.domain.data.menu.AppMenuData;
 import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.menu.MenuSummaryData;
 import com.capella.domain.data.treenode.TreeNodeData;
@@ -13,5 +14,5 @@ public interface MenuFacade {
     List<TreeNodeData> getMenusForTreeNode();
     MenuData get(String code);
     void delete(String code);
-    List<MenuData> getCurrentUserMenus();
+    List<AppMenuData> getCurrentUserMenus();
 }

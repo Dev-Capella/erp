@@ -1,5 +1,6 @@
 package com.capella.facade.menu.impl;
 
+import com.capella.domain.data.menu.AppMenuData;
 import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.menu.MenuSummaryData;
 import com.capella.domain.data.treenode.TreeNodeData;
@@ -106,10 +107,21 @@ public class MenuFacadeImpl implements MenuFacade {
     }
 
     @Override
-    public List<MenuData> getCurrentUserMenus() {
+    public List<AppMenuData> getCurrentUserMenus() {
         var menus = menuService.getCurrentUserMenus();
-        return List.of(modelMapper.map(menus, MenuData[].class));
+        var menuDatas = modelMapper.map(menus, MenuData[].class);
 
+        var appMenuDatas = new ArrayList<AppMenuData>();
+        Arrays.stream(menuDatas).forEach(m -> {
+            var appMenuData = new AppMenuData();
+            appMenuData.setLabel(m.getShortText());
+            appMenuData.setIcon(m.getIcon());
+            appMenuData.setRouterLink(Arrays.asList(m.getRouterLink()));
+            appMenuData.setItems(setItems(m));
+            appMenuDatas.add(appMenuData);
+        });
+
+        return appMenuDatas;
     }
 
     private List<TreeNodeData> setChildren(MenuData menuData){
@@ -125,5 +137,20 @@ public class MenuFacadeImpl implements MenuFacade {
             }
         }
         return treeNodeDatas;
+    }
+
+    private List<AppMenuData> setItems(MenuData menuData){
+        var appMenuDatas = new ArrayList<AppMenuData>();
+        if(CollectionUtils.isNotEmpty(menuData.getItems())){
+            for (MenuData m : menuData.getItems()){
+                var appMenuData = new AppMenuData();
+                appMenuData.setLabel(m.getShortText());
+                appMenuData.setIcon(m.getIcon());
+                appMenuData.setRouterLink(Arrays.asList(m.getRouterLink()));
+                appMenuData.setItems(setItems(m));
+                appMenuDatas.add(appMenuData);
+            }
+        }
+        return appMenuDatas;
     }
 }
