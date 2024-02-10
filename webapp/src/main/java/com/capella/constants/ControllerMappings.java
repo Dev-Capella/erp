@@ -25,4 +25,5 @@ public interface ControllerMappings {
     String PERMISSION ="/permission";
     String MENU = "/menu";
     String USERGENERICGROUPDETAIL = "/user-generic-group-detail";
+    String DOMAINMODEL = "/domain-model";
 }

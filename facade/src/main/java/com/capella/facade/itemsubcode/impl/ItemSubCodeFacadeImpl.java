@@ -7,11 +7,13 @@ import com.capella.facade.itemsubcode.ItemSubCodeFacade;
 import com.capella.service.itemsubcode.ItemSubCodeService;
 import com.capella.service.itemtype.ItemTypeService;
 import com.capella.service.model.ModelService;
+import com.capella.service.usergenericgroup.UserGenericGroupService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -23,6 +25,7 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
     protected final ModelService modelService;
     protected final ItemTypeService itemTypeService;
     protected final ItemSubCodeService itemSubCodeService;
+    protected final UserGenericGroupService userGenericGroupService;
 
     @Override
     public void save(ItemSubCodeData itemSubCodeData) {
@@ -33,6 +36,14 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
         }else{
             itemSubCodeModel = itemSubCodeService.getItemSubCodeModel(itemSubCodeData.getCode());
             modelMapper.map(itemSubCodeData, itemSubCodeModel);
+        }
+        if(Objects.nonNull(itemSubCodeData.getItemSubCodeCheckType())){
+            var itemSubCodeCheckTypeModel = unitOfMeasureService.getUnitOfMeasureModel(itemSubCodeData.getItemSubCodeCheckType().getCode());
+            itemSubCodeModel.setItemSubCodeCheckType(itemSubCodeCheckTypeModel);
+        }
+        if(Objects.nonNull(itemSubCodeData.getUserGenericGroup())){
+            var userGenericGroupModel = userGenericGroupService.getUserGenericGroupModel(itemSubCodeData.getUserGenericGroup().getCode());
+            itemSubCodeModel.setUserGenericGroup(userGenericGroupModel);
         }
         itemSubCodeModel.setItemType(itemTypeService.getItemTypeModel(itemSubCodeData.getItemType().getCode()));
         modelService.save(itemSubCodeModel);

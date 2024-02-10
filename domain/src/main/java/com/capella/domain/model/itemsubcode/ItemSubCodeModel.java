@@ -3,13 +3,17 @@ package com.capella.domain.model.itemsubcode;
 import com.capella.domain.enums.ItemSubCodeDataType;
 import com.capella.domain.enums.ItemSubCodeType;
 import com.capella.domain.model.extend.CodeBasedModel;
+import com.capella.domain.model.itemsubcodechecktype.ItemSubCodeCheckTypeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
+import com.capella.domain.model.usergenericgroup.UserGenericGroupModel;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ItemSubCode")
 @Getter
+@Setter
 public class ItemSubCodeModel extends CodeBasedModel {
 
     public static final String ITEM_SUBCODE_RELATION = "item_subcode_id";
@@ -43,51 +47,9 @@ public class ItemSubCodeModel extends CodeBasedModel {
             joinColumns = @JoinColumn(name = ITEM_SUBCODE_RELATION), inverseJoinColumns = @JoinColumn(name = "item_type_id"))
     private ItemTypeModel itemType;
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ItemSubCodeCheckTypeModel itemSubCodeCheckType;
 
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public void setMandatory(Boolean mandatory) {
-        this.mandatory = mandatory;
-    }
-
-    public void setLongText(String longText) {
-        this.longText = longText;
-    }
-
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public void setOutputSeparator(char outputSeparator) {
-        this.outputSeparator = outputSeparator;
-    }
-
-    public void setWareHouseManagement(Boolean wareHouseManagement) {
-        this.wareHouseManagement = wareHouseManagement;
-    }
-
-    public void setExcludedCostManagement(Boolean excludedCostManagement) {
-        this.excludedCostManagement = excludedCostManagement;
-    }
-
-    public void setItemSubCodeDataType(ItemSubCodeDataType itemSubCodeDataType) {
-        this.itemSubCodeDataType = itemSubCodeDataType;
-    }
-
-    public void setType(ItemSubCodeType type) {
-        this.type = type;
-    }
-
-    public void setItemType(ItemTypeModel itemType) {
-        this.itemType = itemType;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserGenericGroupModel userGenericGroup;
 }

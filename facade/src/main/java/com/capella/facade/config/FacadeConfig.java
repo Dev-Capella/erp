@@ -1,6 +1,7 @@
 package com.capella.facade.config;
 
 import com.capella.domain.data.compositiondetail.CompositionDetailData;
+import com.capella.domain.data.itemsubcode.ItemSubCodeData;
 import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.manufacturer.ManufacturerData;
 import com.capella.domain.data.media.MediaData;
@@ -8,6 +9,7 @@ import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.product.ProductData;
 import com.capella.domain.data.productiongroup.ProductionGroupData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
+import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.manufacturer.ManufacturerModel;
 import com.capella.domain.model.media.MediaModel;
@@ -83,6 +85,14 @@ public class FacadeConfig {
                 skip(destination.getPermissions());
                 skip(destination.getUserRoles());
                 skip(destination.getItems());
+            }
+        });
+
+        modelMapper.addMappings(new PropertyMap<ItemSubCodeData, ItemSubCodeModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getItemSubCodeCheckType());
+                skip(destination.getUserGenericGroup());
             }
         });
 
