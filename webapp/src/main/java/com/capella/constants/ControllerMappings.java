@@ -24,4 +24,5 @@ public interface ControllerMappings {
     String USERROLE ="/user-role";
     String PERMISSION ="/permission";
     String MENU = "/menu";
+    String USERGENERICGROUPDETAIL = "/user-generic-group-detail";
 }

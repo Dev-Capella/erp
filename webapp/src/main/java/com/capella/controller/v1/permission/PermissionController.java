@@ -7,6 +7,7 @@ import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.permission.PermissionFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 @RestController("permissionControllerV1")
@@ -17,6 +18,7 @@ public class PermissionController {
     protected final PermissionFacade permissionFacade;
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('Permission_Save')")
     public ServiceResponseData save(@Validated @RequestBody PermissionData permissionData){
         log.info("Inside save of PermissionController",permissionData);
         permissionFacade.save(permissionData);
@@ -25,6 +27,7 @@ public class PermissionController {
         return response;
     }
     @GetMapping(ControllerMappings.CODE)
+    @PreAuthorize("hasAnyAuthority('Permission_Read')")
     public ServiceResponseData get(@PathVariable String code){
         log.info("Inside get of PermissionController",code);
         var permissionData = permissionFacade.get(code);
@@ -34,6 +37,7 @@ public class PermissionController {
         return response;
     }
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('Permission_Read')")
     public ServiceResponseData getAll(){
         log.info("Inside getAll of PermissionController");
         var permissionDatas = permissionFacade.getAll();
@@ -43,6 +47,7 @@ public class PermissionController {
         return response;
     }
     @DeleteMapping(ControllerMappings.CODE)
+    @PreAuthorize("hasAnyAuthority('Permission_Remove')")
     public ServiceResponseData delete(@PathVariable String code){
         log.info("Inside delete of PermissionController",code);
         permissionFacade.delete(code);

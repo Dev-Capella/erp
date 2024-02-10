@@ -53,4 +53,14 @@ public class UserGenericGroupController {
         response.setStatus(ProcessStatus.SUCCESS);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.USERGENERICGROUPDETAIL)
+    public ServiceResponseData getUserGenericGroupDetailsByUserGenericGroup(@PathVariable String code){
+        log.info("Inside getUserGenericGroupDetailsByUserGenericGroup of UserGenericGroupController",code);
+        var userGenericGroupDetailData = userGenericGroupFacade.getUserGenericGroupDetailsByUserGenericGroup(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(userGenericGroupDetailData);
+        return response;
+    }
 }

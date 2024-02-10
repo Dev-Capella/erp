@@ -2,16 +2,22 @@ package com.capella.domain.model.usergenericgroup;
 
 import com.capella.domain.enums.UserGenericGroupDataType;
 import com.capella.domain.model.extend.CodeBasedModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import com.capella.domain.model.qualitylevel.QualityLevelModel;
+import com.capella.domain.model.usergenericgroupdetail.UserGenericGroupDetailModel;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "UserGenericGroup")
 @Getter
+@Setter
 public class UserGenericGroupModel extends CodeBasedModel {
+
+    public static final String USER_GENERIC_GROUP_RELATION = "user_generic_group_id";
+
     private int maxCodeLength;
     @Enumerated(EnumType.STRING)
     private UserGenericGroupDataType type;
@@ -19,23 +25,8 @@ public class UserGenericGroupModel extends CodeBasedModel {
     private String shortText;
     private String searchText;
 
-    public void setMaxCodeLength(int maxCodeLength) {
-        this.maxCodeLength = maxCodeLength;
-    }
-
-    public void setType(UserGenericGroupDataType type) {
-        this.type = type;
-    }
-
-    public void setLongText(String longText) {
-        this.longText = longText;
-    }
-
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
+    @OneToMany
+    @JoinTable(name="user_generic_group_user_generic_group_details",
+            joinColumns = @JoinColumn(name = USER_GENERIC_GROUP_RELATION), inverseJoinColumns = @JoinColumn(name = UserGenericGroupDetailModel.USER_GENERIC_GROUP_DETAIL_RELATION))
+    private Set<UserGenericGroupDetailModel> userGenericGroupDetails;
 }

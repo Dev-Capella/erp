@@ -1,6 +1,8 @@
 package com.capella.domain.data.itemtype;
 
 import com.capella.domain.data.base.BaseDescriptionData;
+import com.capella.domain.data.itemsubcode.ItemSubCodeData;
+import com.capella.domain.data.itemsubcode.ItemSubCodeSummaryData;
 import com.capella.domain.data.unitofmeasure.UnitOfMeasureData;
 import com.capella.domain.enums.BaseUoMPackagingType;
 import com.capella.domain.enums.ItemNature;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
@@ -39,4 +42,5 @@ public class ItemTypeData extends BaseDescriptionData {
     private UnitOfMeasureData primaryUOM;
     private UnitOfMeasureData secondaryUOM;
     private UnitOfMeasureData packagingUOM;
+    private Set<ItemSubCodeSummaryData> itemSubCodes;
 }

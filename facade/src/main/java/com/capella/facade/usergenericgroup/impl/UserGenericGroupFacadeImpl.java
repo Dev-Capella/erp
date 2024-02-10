@@ -1,7 +1,9 @@
 package com.capella.facade.usergenericgroup.impl;
 
+import com.capella.domain.data.compositiondetail.CompositionDetailData;
 import com.capella.domain.data.unitofmeasure.UnitOfMeasureData;
 import com.capella.domain.data.usergenericgroup.UserGenericGroupData;
+import com.capella.domain.data.usergenericgroupdetail.UserGenericGroupDetailData;
 import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
 import com.capella.domain.model.usergenericgroup.UserGenericGroupModel;
 import com.capella.facade.usergenericgroup.UserGenericGroupFacade;
@@ -52,5 +54,12 @@ public class UserGenericGroupFacadeImpl implements UserGenericGroupFacade {
     public void delete(String code) {
         var userGenericGroupModel = userGenericGroupService.getUserGenericGroupModel(code);
         modelService.remove(userGenericGroupModel);
+    }
+
+    @Override
+    public Set<UserGenericGroupDetailData> getUserGenericGroupDetailsByUserGenericGroup(String code) {
+        var userGenericGroupModel = userGenericGroupService.getUserGenericGroupModel(code);
+        var userGenericGroupDetails = userGenericGroupModel.getUserGenericGroupDetails();
+        return Set.of(modelMapper.map(userGenericGroupDetails, UserGenericGroupDetailData[].class));
     }
 }
