@@ -5,6 +5,7 @@ import com.capella.domain.data.qualitylevel.QualityLevelData;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.facade.itemsubcode.ItemSubCodeFacade;
 import com.capella.service.itemsubcode.ItemSubCodeService;
+import com.capella.service.itemsubcodechecktype.ItemSubCodeCheckTypeService;
 import com.capella.service.itemtype.ItemTypeService;
 import com.capella.service.model.ModelService;
 import com.capella.service.usergenericgroup.UserGenericGroupService;
@@ -25,6 +26,7 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
     protected final ModelService modelService;
     protected final ItemTypeService itemTypeService;
     protected final ItemSubCodeService itemSubCodeService;
+    protected final ItemSubCodeCheckTypeService itemSubCodeCheckTypeService;
     protected final UserGenericGroupService userGenericGroupService;
 
     @Override
@@ -38,7 +40,7 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
             modelMapper.map(itemSubCodeData, itemSubCodeModel);
         }
         if(Objects.nonNull(itemSubCodeData.getItemSubCodeCheckType())){
-            var itemSubCodeCheckTypeModel = unitOfMeasureService.getUnitOfMeasureModel(itemSubCodeData.getItemSubCodeCheckType().getCode());
+            var itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(itemSubCodeData.getItemSubCodeCheckType().getCode());
             itemSubCodeModel.setItemSubCodeCheckType(itemSubCodeCheckTypeModel);
         }
         if(Objects.nonNull(itemSubCodeData.getUserGenericGroup())){

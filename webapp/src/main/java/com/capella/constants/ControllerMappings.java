@@ -26,4 +26,7 @@ public interface ControllerMappings {
     String MENU = "/menu";
     String USERGENERICGROUPDETAIL = "/user-generic-group-detail";
     String DOMAINMODEL = "/domain-model";
+    String ITEMSUBCODECHECKTYPE = "/item-sub-code-check-type";
+    String USERAUDIT = "/user-audit";
+
 }

@@ -8,6 +8,8 @@ import com.capella.domain.data.media.MediaData;
 import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.product.ProductData;
 import com.capella.domain.data.productiongroup.ProductionGroupData;
+import com.capella.domain.data.user.UserData;
+import com.capella.domain.data.userrole.UserRoleData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
@@ -16,6 +18,8 @@ import com.capella.domain.model.media.MediaModel;
 import com.capella.domain.model.menu.MenuModel;
 import com.capella.domain.model.product.ProductModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
+import com.capella.domain.model.user.UserModel;
+import com.capella.domain.model.userrole.UserRoleModel;
 import com.capella.service.media.MediaService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -93,6 +97,19 @@ public class FacadeConfig {
             protected void configure() {
                 skip(destination.getItemSubCodeCheckType());
                 skip(destination.getUserGenericGroup());
+            }
+        });
+
+        modelMapper.addMappings(new PropertyMap<UserData, UserModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getUserRoles());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<UserRoleData, UserRoleModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getPermissions());
             }
         });
 
