@@ -2,6 +2,7 @@ package com.capella.domain.model.extend;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @EntityListeners(AuditingEntityListener.class)
 @Getter
@@ -37,6 +40,12 @@ public abstract class ItemModel implements Serializable{
 
     @LastModifiedDate
     private Date lastModifiedDate;
+
+    @Transient
+    private boolean isNewTransaction;
+
+    @Transient
+    private Set<String> modifiedAttributes = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
