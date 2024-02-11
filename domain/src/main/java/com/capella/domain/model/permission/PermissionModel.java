@@ -11,7 +11,9 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = DomainConstant.PERMISSION_TABLE_NAME)
+@Table(name = DomainConstant.PERMISSION_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.PERMISSION_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.PERMISSION_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
 @Setter
 public class PermissionModel extends CodeBasedModel {
@@ -22,7 +24,7 @@ public class PermissionModel extends CodeBasedModel {
 
     @ManyToMany
     @JoinTable(name ="user_roles_permissions",
-            joinColumns = @JoinColumn(name = PERMISSION_RELATION), inverseJoinColumns = @JoinColumn(name = "user_role_id"))
+            joinColumns = @JoinColumn(name = PERMISSION_RELATION), inverseJoinColumns = @JoinColumn(name = UserRoleModel.USER_ROLE_RELATION))
     private Set<UserRoleModel> userRoles;
 
     @ManyToMany

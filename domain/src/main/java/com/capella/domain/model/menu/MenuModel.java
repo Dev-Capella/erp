@@ -11,7 +11,9 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = DomainConstant.MENU_TABLE_NAME)
+@Table(name = DomainConstant.MENU_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.MENU_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.MENU_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
 @Setter
 public class MenuModel extends CodeBasedModel {

@@ -1,16 +1,18 @@
 package com.capella.domain.model.manufacturer;
 
+import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.media.MediaModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "Manufacturer")
+@Table(name = DomainConstant.MANUFACTURER_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.MANUFACTURER_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.MANUFACTURER_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
+@Setter
 public class ManufacturerModel extends CodeBasedModel {
 
     private String name;
@@ -20,24 +22,4 @@ public class ManufacturerModel extends CodeBasedModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private MediaModel media;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLongText(String longText) {
-        this.longText = longText;
-    }
-
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public void setMedia(MediaModel media) {
-        this.media = media;
-    }
 }

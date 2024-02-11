@@ -1,17 +1,18 @@
 package com.capella.domain.model.unitofmeasure;
 
+import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.enums.UnitOfMeasureType;
 import com.capella.domain.model.extend.CodeBasedModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "UnitOfMeasure")
+@Table(name = DomainConstant.UNIT_OF_MEASURE_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.UNIT_OF_MEASURE_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.UNIT_OF_MEASURE_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
+@Setter
 public class UnitOfMeasureModel extends CodeBasedModel {
 
     private String longText;
@@ -23,20 +24,4 @@ public class UnitOfMeasureModel extends CodeBasedModel {
     @Enumerated(EnumType.STRING)
     private UnitOfMeasureType unitOfMeasureType;
 
-
-    public void setLongText(String longText) {
-        this.longText = longText;
-    }
-
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public void setUnitOfMeasureType(UnitOfMeasureType unitOfMeasureType) {
-        this.unitOfMeasureType = unitOfMeasureType;
-    }
 }

@@ -1,16 +1,18 @@
 package com.capella.domain.model.media;
 
+import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.enums.MediaCategory;
 import com.capella.domain.model.extend.CodeBasedModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "Media")
+@Table(name = DomainConstant.MEDIA_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.MEDIA_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.MEDIA_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
+@Setter
 public class MediaModel extends CodeBasedModel {
 
     public static final String MEDIA_RELATION = "media_id";
@@ -29,51 +31,4 @@ public class MediaModel extends CodeBasedModel {
     @Enumerated(EnumType.STRING)
     private MediaCategory mediaCategory;
 
-    public void setRealFileName(String realFileName) {
-        this.realFileName = realFileName;
-    }
-
-    public void setEncodedFileName(String encodedFileName) {
-        this.encodedFileName = encodedFileName;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void setRootPath(String rootPath) {
-        this.rootPath = rootPath;
-    }
-
-    public void setServePath(String servePath) {
-        this.servePath = servePath;
-    }
-
-    public void setAbsolutePath(String absolutePath) {
-        this.absolutePath = absolutePath;
-    }
-
-    public void setMime(String mime) {
-        this.mime = mime;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public void setSecure(boolean secure) {
-        this.secure = secure;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public void setMediaCategory(MediaCategory mediaCategory) {
-        this.mediaCategory = mediaCategory;
-    }
 }

@@ -1,5 +1,6 @@
 package com.capella.domain.model.itemtype;
 
+import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.enums.BaseUoMPackagingType;
 import com.capella.domain.enums.ItemNature;
 import com.capella.domain.enums.StatusAllowed;
@@ -12,13 +13,17 @@ import com.capella.domain.model.routingitemsubcode.RoutingItemSubCodeModel;
 import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
-@Table(name = "ItemType")
+@Table(name = DomainConstant.ITEM_TYPE_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.ITEM_TYPE_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.ITEM_TYPE_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
+@Setter
 public class ItemTypeModel extends CodeBasedModel {
 
     public static final String ITEM_TYPE_RELATION = "item_type_id";
@@ -88,149 +93,22 @@ public class ItemTypeModel extends CodeBasedModel {
 
     @OneToMany
     @JoinTable(name="item_types_item_subcodes",
-                joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "item_subcode_id"))
+                joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = ItemSubCodeModel.ITEM_SUBCODE_RELATION))
     private Set<ItemSubCodeModel> itemSubCodes;
 
     @OneToMany
     @JoinTable(name="item_types_quality_levels",
-            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "quality_level_id"))
+            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = QualityLevelModel.QUALITY_LEVEL_RELATION))
     private Set<QualityLevelModel> qualityLevels;
 
     @OneToMany
     @JoinTable(name="item_types_routing_item_subcodes",
-            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "routing_item_subcode_id"))
+            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = RoutingItemSubCodeModel.ROUTING_ITEM_SUBCODE_RELATION))
     private Set<RoutingItemSubCodeModel> routingItemSubCodes;
 
     @OneToMany
     @JoinTable(name="item_types_bom_item_subcodes",
-            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = "bom_item_subcode_id"))
+            joinColumns = @JoinColumn(name = ITEM_TYPE_RELATION), inverseJoinColumns = @JoinColumn(name = BoMItemSubCodeModel.BoM_ITEM_SUBCODE_RELATION))
     private Set<BoMItemSubCodeModel> bomItemSubCodes;
 
-    public void setSellingType(Boolean sellingType) {
-        this.sellingType = sellingType;
-    }
-
-    public void setValid(Boolean valid) {
-        this.valid = valid;
-    }
-
-    public void setManagedByBox(Boolean managedByBox) {
-        this.managedByBox = managedByBox;
-    }
-
-    public void setHandleComponentStatus(Boolean handleComponentStatus) {
-        this.handleComponentStatus = handleComponentStatus;
-    }
-
-    public void setLongText(String longText) {
-        this.longText = longText;
-    }
-
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public void setQualityControlled(Boolean qualityControlled) {
-        this.qualityControlled = qualityControlled;
-    }
-
-    public void setLotControlled(Boolean lotControlled) {
-        this.lotControlled = lotControlled;
-    }
-
-    public void setContainerControlled(Boolean containerControlled) {
-        this.containerControlled = containerControlled;
-    }
-
-    public void setElementControlled(Boolean elementControlled) {
-        this.elementControlled = elementControlled;
-    }
-
-    public void setProjectControlled(Boolean projectControlled) {
-        this.projectControlled = projectControlled;
-    }
-
-    public void setStatisticalGroupControlled(Boolean statisticalGroupControlled) {
-        this.statisticalGroupControlled = statisticalGroupControlled;
-    }
-
-    public void setCostForStatisticalGroupControlled(Boolean costForStatisticalGroupControlled) {
-        this.costForStatisticalGroupControlled = costForStatisticalGroupControlled;
-    }
-
-    public void setCustomerControlled(Boolean customerControlled) {
-        this.customerControlled = customerControlled;
-    }
-
-    public void setSupplierControlled(Boolean supplierControlled) {
-        this.supplierControlled = supplierControlled;
-    }
-
-    public void setSecondaryConversionFactor(BigDecimal secondaryConversionFactor) {
-        this.secondaryConversionFactor = secondaryConversionFactor;
-    }
-
-    public void setPackagingUnitControlled(Boolean packagingUnitControlled) {
-        this.packagingUnitControlled = packagingUnitControlled;
-    }
-
-    public void setSecondaryUnitControlled(Boolean secondaryUnitControlled) {
-        this.secondaryUnitControlled = secondaryUnitControlled;
-    }
-
-    public void setPackagingConversionFactor(BigDecimal packagingConversionFactor) {
-        this.packagingConversionFactor = packagingConversionFactor;
-    }
-
-    public void setMaxCodeLength(int maxCodeLength) {
-        this.maxCodeLength = maxCodeLength;
-    }
-
-    public void setBaseUoMPackagingType(BaseUoMPackagingType baseUoMPackagingType) {
-        this.baseUoMPackagingType = baseUoMPackagingType;
-    }
-
-    public void setItemNature(ItemNature itemNature) {
-        this.itemNature = itemNature;
-    }
-
-    public void setStatusAllowed(StatusAllowed statusAllowed) {
-        this.statusAllowed = statusAllowed;
-    }
-
-    public void setStructure(Structure structure) {
-        this.structure = structure;
-    }
-
-    public void setPrimaryUOM(UnitOfMeasureModel primaryUOM) {
-        this.primaryUOM = primaryUOM;
-    }
-
-    public void setSecondaryUOM(UnitOfMeasureModel secondaryUOM) {
-        this.secondaryUOM = secondaryUOM;
-    }
-
-    public void setPackagingUOM(UnitOfMeasureModel packagingUOM) {
-        this.packagingUOM = packagingUOM;
-    }
-
-    public void setItemSubCode(Set<ItemSubCodeModel> itemSubCode) {
-        this.itemSubCodes = itemSubCode;
-    }
-
-    public void setQualityLevel(Set<QualityLevelModel> qualityLevel) {
-        this.qualityLevels = qualityLevel;
-    }
-
-    public void setRoutingItemSubCodes(Set<RoutingItemSubCodeModel> routingItemSubCodes) {
-        this.routingItemSubCodes = routingItemSubCodes;
-    }
-
-    public void setBomItemSubCodes(Set<BoMItemSubCodeModel> bomItemSubCodes) {
-        this.bomItemSubCodes = bomItemSubCodes;
-    }
 }

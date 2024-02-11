@@ -1,5 +1,6 @@
 package com.capella.domain.model.usergenericgroup;
 
+import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.enums.UserGenericGroupDataType;
 import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.qualitylevel.QualityLevelModel;
@@ -11,7 +12,9 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = "UserGenericGroup")
+@Table(name = DomainConstant.USER_GENERIC_GROUP_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.USER_GENERIC_GROUP_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.USER_GENERIC_GROUP_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
 @Setter
 public class UserGenericGroupModel extends CodeBasedModel {

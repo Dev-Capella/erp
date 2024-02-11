@@ -6,12 +6,14 @@ import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.user.UserModel;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
 @Table(name = DomainConstant.USERAUDIT_TABLE_NAME)
 @Getter
+@Setter
 public class UserAuditModel extends CodeBasedModel {
     public static final String USERAUDIT_RELATION = "user_audit_id";
 
@@ -24,23 +26,4 @@ public class UserAuditModel extends CodeBasedModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private UserModel user;
 
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-
-    public void setLoginDate(Date loginDate) {
-        this.loginDate = loginDate;
-    }
-
-    public void setLoginResultType(LoginResultType loginResultType) {
-        this.loginResultType = loginResultType;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public void setClientInfo(String clientInfo) {
-        this.clientInfo = clientInfo;
-    }
 }

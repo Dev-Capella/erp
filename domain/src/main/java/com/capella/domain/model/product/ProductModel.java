@@ -8,17 +8,16 @@ import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.manufacturer.ManufacturerModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
-@Table(name = DomainConstant.PRODUCT_TABLE_NAME)
+@Table(name = DomainConstant.PRODUCT_TABLE_NAME,
+        uniqueConstraints = {@UniqueConstraint(name = DomainConstant.PRODUCT_TABLE_NAME + DomainConstant.UNIQUE_KEYS, columnNames = {CodeBasedModel.Fields.code})},
+        indexes = {@Index(name = DomainConstant.PRODUCT_TABLE_NAME + DomainConstant.CODE_IDX, columnList = "code")})
 @Getter
 @Setter
 public class ProductModel extends CodeBasedModel {
