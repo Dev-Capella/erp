@@ -8,11 +8,14 @@ import com.capella.domain.model.extend.CodeBasedModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.manufacturer.ManufacturerModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
+import com.capella.domain.model.productsubcodevalue.ProductSubCodeValueModel;
+import com.capella.domain.model.routingitemsubcode.RoutingItemSubCodeModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = DomainConstant.PRODUCT_TABLE_NAME,
@@ -56,5 +59,10 @@ public class ProductModel extends CodeBasedModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ItemTypeModel itemType;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="products_product_sub_code_values",
+            joinColumns = @JoinColumn(name = PRODUCT_RELATION), inverseJoinColumns = @JoinColumn(name = ProductSubCodeValueModel.PRODUCT_SUB_CODE_VALUE_RELATION))
+    private Set<ProductSubCodeValueModel> productSubCodeValues;
 
 }
