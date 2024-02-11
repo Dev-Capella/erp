@@ -22,7 +22,6 @@ public class UserGenericGroupDetailController {
     protected final UserGenericGroupDetailFacade userGenericGroupDetailFacade;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('User_Generic_Group_Detail_Save')")
     public ServiceResponseData save(@Validated @RequestBody UserGenericGroupDetailData userGenericGroupDetailData){
         log.info("Inside save of UserGenericGroupDetailController",userGenericGroupDetailData);
         userGenericGroupDetailFacade.save(userGenericGroupDetailData);
@@ -32,7 +31,6 @@ public class UserGenericGroupDetailController {
     }
 
     @DeleteMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('User_Generic_Group_Detail_Remove')")
     public ServiceResponseData delete(@PathVariable String code){
         log.info("Inside delete of UserGenericGroupDetailController",code);
         userGenericGroupDetailFacade.delete(code);
@@ -42,7 +40,6 @@ public class UserGenericGroupDetailController {
     }
 
     @GetMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('User_Generic_Group_Detail_Read')")
     public ServiceResponseData get(@PathVariable String code){
         log.info("Inside get of UserGenericGroupDetailController",code);
         var compositionDetailData = userGenericGroupDetailFacade.get(code);

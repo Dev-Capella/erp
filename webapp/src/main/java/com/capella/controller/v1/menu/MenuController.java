@@ -20,7 +20,6 @@ public class MenuController {
     protected final MenuFacade menuFacade;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('Menu_Save')")
     public ServiceResponseData save(@Validated @RequestBody MenuData menuData){
         log.info("Inside save of MenuController",menuData);
         menuFacade.save(menuData);
@@ -30,7 +29,6 @@ public class MenuController {
     }
 
     @GetMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('Menu_Read')")
     public ServiceResponseData get(@PathVariable String code){
         log.info("Inside get of MenuController",code);
         var menuData = menuFacade.get(code);
@@ -41,7 +39,6 @@ public class MenuController {
     }
 
     @GetMapping("/roots")
-    @PreAuthorize("hasAnyAuthority('Menu_Read')")
     public ServiceResponseData getMenusByRoot(){
         log.info("Inside getMenusByRoot of MenuController");
         var rootMenuDatas = menuFacade.getMenusByRoot();
@@ -52,7 +49,6 @@ public class MenuController {
     }
 
     @GetMapping(ControllerMappings.CODE + "/items")
-    @PreAuthorize("hasAnyAuthority('Menu_Read')")
     public ServiceResponseData getMenuItemsByCode(@PathVariable String code){
         log.info("Inside getMenuItemsByCode of MenuController", code);
         var menuItems = menuFacade.getMenuItemsByCode(code);
@@ -63,7 +59,6 @@ public class MenuController {
     }
 
     @GetMapping("/tree-node")
-    @PreAuthorize("hasAnyAuthority('Menu_Read')")
     public ServiceResponseData getMenusForTreeNode(){
         log.info("Inside getMenusForTreeNode of MenuController");
         var menus = menuFacade.getMenusForTreeNode();
@@ -74,7 +69,6 @@ public class MenuController {
     }
 
     @DeleteMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('Menu_Remove')")
     public ServiceResponseData delete(@PathVariable String code){
         log.info("Inside delete of MenuController",code);
         menuFacade.delete(code);
@@ -84,7 +78,6 @@ public class MenuController {
     }
 
     @GetMapping("/current-user")
-    @PreAuthorize("hasAnyAuthority(@authorizationConstants.generateRoles('MenuModel', @authorizationConstants.READ))")
     public ServiceResponseData getCurrentUserMenus(){
         log.info("Inside getCurrentUserMenus of MenuController");
         var currentUserMenus = menuFacade.getCurrentUserMenus();

@@ -19,7 +19,6 @@ public class ItemSubCodeCheckTypeController {
     protected final ItemSubCodeCheckTypeFacade itemSubCodeCheckTypeFacade;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ItemSubCodeCheckType_Save')")
     public ServiceResponseData save(@Validated @RequestBody ItemSubCodeCheckTypeData itemSubCodeCheckTypeData){
         log.info("Inside save of ItemSubCodeCheckTypeController",itemSubCodeCheckTypeData);
         itemSubCodeCheckTypeFacade.save(itemSubCodeCheckTypeData);
@@ -28,7 +27,6 @@ public class ItemSubCodeCheckTypeController {
         return response;
     }
     @GetMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('ItemSubCodeCheckType_Read')")
     public ServiceResponseData get(@PathVariable String code){
         log.info("Inside get of ItemSubCodeCheckTypeController",code);
         var itemSubCodeCheckTypeData = itemSubCodeCheckTypeFacade.get(code);
@@ -38,7 +36,6 @@ public class ItemSubCodeCheckTypeController {
         return response;
     }
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ItemSubCodeCheckType_Read')")
     public ServiceResponseData getAll(){
         log.info("Inside getAll of ItemSubCodeCheckTypeController");
         var itemSubCodeCheckTypeDatas = itemSubCodeCheckTypeFacade.getAll();
@@ -48,7 +45,6 @@ public class ItemSubCodeCheckTypeController {
         return response;
     }
     @DeleteMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('ItemSubCodeCheckType_Remove')")
     public ServiceResponseData delete(@PathVariable String code){
         log.info("Inside delete of ItemSubCodeCheckTypeController",code);
         itemSubCodeCheckTypeFacade.delete(code);

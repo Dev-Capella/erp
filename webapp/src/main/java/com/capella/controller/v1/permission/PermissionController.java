@@ -18,7 +18,6 @@ public class PermissionController {
     protected final PermissionFacade permissionFacade;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('Permission_Save')")
     public ServiceResponseData save(@Validated @RequestBody PermissionData permissionData){
         log.info("Inside save of PermissionController",permissionData);
         permissionFacade.save(permissionData);
@@ -27,7 +26,6 @@ public class PermissionController {
         return response;
     }
     @GetMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('Permission_Read')")
     public ServiceResponseData get(@PathVariable String code){
         log.info("Inside get of PermissionController",code);
         var permissionData = permissionFacade.get(code);
@@ -37,7 +35,6 @@ public class PermissionController {
         return response;
     }
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('Permission_Read')")
     public ServiceResponseData getAll(){
         log.info("Inside getAll of PermissionController");
         var permissionDatas = permissionFacade.getAll();
@@ -47,7 +44,6 @@ public class PermissionController {
         return response;
     }
     @DeleteMapping(ControllerMappings.CODE)
-    @PreAuthorize("hasAnyAuthority('Permission_Remove')")
     public ServiceResponseData delete(@PathVariable String code){
         log.info("Inside delete of PermissionController",code);
         permissionFacade.delete(code);
