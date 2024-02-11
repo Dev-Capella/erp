@@ -3,6 +3,8 @@ package com.capella.facade.itemsubcode.impl;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
 import com.capella.domain.data.qualitylevel.QualityLevelData;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
+import com.capella.domain.model.itemsubcodechecktype.ItemSubCodeCheckTypeModel;
+import com.capella.domain.model.usergenericgroup.UserGenericGroupModel;
 import com.capella.facade.itemsubcode.ItemSubCodeFacade;
 import com.capella.service.itemsubcode.ItemSubCodeService;
 import com.capella.service.itemsubcodechecktype.ItemSubCodeCheckTypeService;
@@ -39,14 +41,16 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
             itemSubCodeModel = itemSubCodeService.getItemSubCodeModel(itemSubCodeData.getCode());
             modelMapper.map(itemSubCodeData, itemSubCodeModel);
         }
+        ItemSubCodeCheckTypeModel itemSubCodeCheckTypeModel = null;
         if(Objects.nonNull(itemSubCodeData.getItemSubCodeCheckType())){
-            var itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(itemSubCodeData.getItemSubCodeCheckType().getCode());
-            itemSubCodeModel.setItemSubCodeCheckType(itemSubCodeCheckTypeModel);
+            itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(itemSubCodeData.getItemSubCodeCheckType().getCode());
         }
+        itemSubCodeModel.setItemSubCodeCheckType(itemSubCodeCheckTypeModel);
+        UserGenericGroupModel userGenericGroupModel = null;
         if(Objects.nonNull(itemSubCodeData.getUserGenericGroup())){
-            var userGenericGroupModel = userGenericGroupService.getUserGenericGroupModel(itemSubCodeData.getUserGenericGroup().getCode());
-            itemSubCodeModel.setUserGenericGroup(userGenericGroupModel);
+            userGenericGroupModel = userGenericGroupService.getUserGenericGroupModel(itemSubCodeData.getUserGenericGroup().getCode());
         }
+        itemSubCodeModel.setUserGenericGroup(userGenericGroupModel);
         itemSubCodeModel.setItemType(itemTypeService.getItemTypeModel(itemSubCodeData.getItemType().getCode()));
         modelService.save(itemSubCodeModel);
     }
