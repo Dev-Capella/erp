@@ -5,6 +5,7 @@ import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.menu.MenuFacade;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -83,7 +84,7 @@ public class MenuController {
     }
 
     @GetMapping("/current-user")
-    @PreAuthorize("hasAnyAuthority('Menu_Read')")
+    @PreAuthorize("hasAnyAuthority(@authorizationConstants.generateRoles('MenuModel', @authorizationConstants.READ))")
     public ServiceResponseData getCurrentUserMenus(){
         log.info("Inside getCurrentUserMenus of MenuController");
         var currentUserMenus = menuFacade.getCurrentUserMenus();

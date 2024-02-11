@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,5 +23,14 @@ public class ErpClassUtils extends ClassUtils {
                 .stream()
                 .collect(Collectors.toSet());
         return classes;
+    }
+
+    public static String generateClassName(String className, String delimiter, String prefix) {
+        var parts = StringUtils.split(className, delimiter);
+        var plainName = Arrays.asList(parts).stream().map(p-> StringUtils.capitalize(p)).collect(Collectors.joining());
+        if(StringUtils.contains(plainName, "Model")){
+            return plainName;
+        }
+        return StringUtils.join(plainName, prefix);
     }
 }
