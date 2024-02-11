@@ -27,7 +27,6 @@ public class ExceptionHelper {
     }
     private ServiceResponseData fillServiceResponseData(Exception ex){
         var serviceResponseData = new ServiceResponseData();
-
         serviceResponseData.setStatus(ProcessStatus.ERROR);
         serviceResponseData.setErrorMessage(ExceptionUtils.getMessage(ex));
         serviceResponseData.setErrorMessageDetail(Arrays.asList(ExceptionUtils.getStackFrames(ex)).stream().limit(50).collect(Collectors.joining()));
