@@ -28,5 +28,6 @@ public interface ControllerMappings {
     String DOMAINMODEL = "/domain-model";
     String ITEMSUBCODECHECKTYPE = "/item-sub-code-check-type";
     String USERAUDIT = "/user-audit";
+    String PARAMETER = "/parameter";
 
 }
