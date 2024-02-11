@@ -3,17 +3,27 @@ package com.capella.service.model.impl;
 import com.capella.base.util.ErpClassUtils;
 import com.capella.domain.model.extend.ItemModel;
 import com.capella.persistence.dao.model.ModelDao;
+import com.capella.service.exception.ErpRuntimeException;
+import com.capella.service.exception.interceptor.InterceptorException;
+import com.capella.service.exception.model.ModelRemoveException;
+import com.capella.service.exception.model.ModelSaveException;
 import com.capella.service.interceptor.Interceptor;
 import com.capella.service.interceptor.registry.InterceptorRegistry;
 import com.capella.service.model.ModelService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,7 +43,11 @@ public class ModelServiceImpl implements ModelService {
             runAfterInterceptors(t, Transaction.SAVE);
             return model;
         } catch (Exception e) {
-            throw e;
+            var errorMessage = getValidatorMessageWhenSave(e);
+            if(e instanceof ErpRuntimeException){
+                throw ((ErpRuntimeException) e);
+            }
+            throw new ModelSaveException(errorMessage);
         }
 
     }
@@ -51,7 +65,11 @@ public class ModelServiceImpl implements ModelService {
             }
             return models;
         } catch (Exception e) {
-            throw e;
+            var errorMessage = getValidatorMessageWhenSave(e);
+            if(e instanceof ErpRuntimeException){
+                throw ((ErpRuntimeException) e);
+            }
+            throw new ModelSaveException(errorMessage);
         }
 
     }
@@ -69,7 +87,11 @@ public class ModelServiceImpl implements ModelService {
             }
             return models;
         } catch (Exception e) {
-            throw e;
+            var errorMessage = getValidatorMessageWhenSave(e);
+            if(e instanceof ErpRuntimeException){
+                throw ((ErpRuntimeException) e);
+            }
+            throw new ModelSaveException(errorMessage);
         }
 
     }
@@ -81,7 +103,11 @@ public class ModelServiceImpl implements ModelService {
             modelDao.delete(t);
             runAfterInterceptors(t, Transaction.REMOVE);
         } catch (Exception e) {
-            throw e;
+            var errorMessage = getValidatorMessageWhenSave(e);
+            if(e instanceof ErpRuntimeException){
+                throw ((ErpRuntimeException) e);
+            }
+            throw new ModelRemoveException(errorMessage);
         }
 
     }
@@ -97,7 +123,11 @@ public class ModelServiceImpl implements ModelService {
                 runAfterInterceptors(item, Transaction.REMOVE);
             }
         } catch (Exception e) {
-            throw e;
+            var errorMessage = getValidatorMessageWhenSave(e);
+            if(e instanceof ErpRuntimeException){
+                throw ((ErpRuntimeException) e);
+            }
+            throw new ModelRemoveException(errorMessage);
         }
 
     }
@@ -114,12 +144,16 @@ public class ModelServiceImpl implements ModelService {
                 runAfterInterceptors(item, Transaction.REMOVE);
             }
         } catch (Exception e) {
-            throw e;
+            var errorMessage = getValidatorMessageWhenSave(e);
+            if(e instanceof ErpRuntimeException){
+                throw ((ErpRuntimeException) e);
+            }
+            throw new ModelRemoveException(errorMessage);
         }
 
     }
 
-    protected <T extends ItemModel> void runBeforeInterceptors(T t, Transaction transaction) {
+    protected <T extends ItemModel> void runBeforeInterceptors(T t, Transaction transaction) throws InterceptorException {
         var interceptor = StringUtils.EMPTY;
         try {
             if (Transaction.REMOVE.equals(transaction)) {
@@ -145,13 +179,16 @@ public class ModelServiceImpl implements ModelService {
                 }
             }
         } catch (final Exception e) {
-
-
+            if(e instanceof InterceptorException){
+                throw new InterceptorException("Interceptor : " + interceptor + StringUtils.SPACE + ExceptionUtils.getMessage(e), ((InterceptorException) e).getMessageKey(), ((InterceptorException) e).getArgs());
+            }else{
+                throw new InterceptorException("Interceptor : " + interceptor + StringUtils.SPACE + ExceptionUtils.getMessage(e));
+            }
         }
 
     }
 
-    protected <T extends ItemModel> void runAfterInterceptors(T t, Transaction transaction)  {
+    protected <T extends ItemModel> void runAfterInterceptors(T t, Transaction transaction) throws InterceptorException  {
         var interceptor = StringUtils.EMPTY;
         try {
             if (Transaction.REMOVE.equals(transaction)) {
@@ -174,10 +211,32 @@ public class ModelServiceImpl implements ModelService {
                 }
             }
         } catch (final Exception e) {
-
+            if(e instanceof InterceptorException){
+                throw new InterceptorException("Interceptor : " + interceptor + StringUtils.SPACE + ExceptionUtils.getMessage(e), ((InterceptorException) e).getMessageKey(), ((InterceptorException) e).getArgs());
+            }else{
+                throw new InterceptorException("Interceptor : " + interceptor + StringUtils.SPACE + ExceptionUtils.getMessage(e));
+            }
         }
 
 
+    }
+
+    public String getValidatorMessageWhenSave(Exception e) {
+        String message = ExceptionUtils.getMessage(e);
+        if (e instanceof TransactionSystemException
+                && ((TransactionSystemException) e).getRootCause() instanceof ConstraintViolationException) {
+            ConstraintViolationException modelValidatorEx =
+                    ((ConstraintViolationException) ((TransactionSystemException) e).getRootCause());
+            if (Objects.nonNull(modelValidatorEx)) {
+                Set<ConstraintViolation<?>> constraintViolations = modelValidatorEx.getConstraintViolations();
+                message = constraintViolations.iterator().hasNext()
+                        ? constraintViolations.iterator().next().getMessage() : message;
+            }
+        } else if (e instanceof DataIntegrityViolationException) {
+            message = ExceptionUtils.getRootCauseMessage(e);
+
+        }
+        return message;
     }
     enum Transaction {
         SAVE, REMOVE
