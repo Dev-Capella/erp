@@ -1,6 +1,7 @@
 package com.capella.service.interceptor.impl.menu.beforesave;
 
 
+import com.capella.base.constant.MessageConstant;
 import com.capella.domain.model.menu.MenuModel;
 import com.capella.service.exception.interceptor.InterceptorException;
 import com.capella.service.interceptor.BeforeSaveInterceptor;
@@ -17,7 +18,7 @@ public class RootMenuInterceptor implements Interceptor<MenuModel> {
     @Override
     public void invoke(MenuModel model) throws InterceptorException {
         if(model.isRoot() && Objects.nonNull(model.getParent())){
-            throw new InterceptorException("Root menu can not have parent",null,null);
+            throw new InterceptorException("Root menu can not have parent", MessageConstant.MENU_ROOT_PARENT_MESSAGE,null);
         }
     }
 }
