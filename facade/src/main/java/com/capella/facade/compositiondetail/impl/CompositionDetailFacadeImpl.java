@@ -2,6 +2,7 @@ package com.capella.facade.compositiondetail.impl;
 
 import com.capella.domain.data.compositiondetail.CompositionDetailData;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
+import com.capella.domain.model.compositioncomponent.CompositionComponentModel;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.facade.compositiondetail.CompositionDetailFacade;
@@ -38,10 +39,11 @@ public class CompositionDetailFacadeImpl implements CompositionDetailFacade {
             compositionDetailModel = compositionDetailService.getCompositionDetailModel(compositionDetailData.getCode());
             modelMapper.map(compositionDetailData, compositionDetailModel);
         }
+        CompositionComponentModel  compositionComponent = null;
         if(Objects.nonNull(compositionDetailData.getCompositionComponent())){
-            var compositionComponentModel = compositionComponentService.getCompositionComponentModel(compositionDetailData.getCompositionComponent().getCode());
-            compositionDetailModel.setCompositionComponent(compositionComponentModel);
+            compositionComponent = compositionComponentService.getCompositionComponentModel(compositionDetailData.getCompositionComponent().getCode());
         }
+        compositionDetailModel.setCompositionComponent(compositionComponent);
         compositionDetailModel.setComposition(compositionService.getCompositionModel(compositionDetailData.getComposition().getCode()));
         modelService.save(compositionDetailModel);
     }

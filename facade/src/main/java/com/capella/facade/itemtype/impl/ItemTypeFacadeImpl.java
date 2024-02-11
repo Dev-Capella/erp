@@ -6,6 +6,7 @@ import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.qualitylevel.QualityLevelData;
 import com.capella.domain.data.routingitemsubcode.RoutingItemSubCodeData;
 import com.capella.domain.model.itemtype.ItemTypeModel;
+import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
 import com.capella.facade.itemtype.ItemTypeFacade;
 import com.capella.service.itemtype.ItemTypeService;
 import com.capella.service.model.ModelService;
@@ -38,18 +39,21 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
             itemTypeModel = itemTypeService.getItemTypeModel(itemTypeData.getCode());
             modelMapper.map(itemTypeData, itemTypeModel);
         }
+        UnitOfMeasureModel primaryUOM = null;
         if(Objects.nonNull(itemTypeData.getPrimaryUOM())){
-            var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPrimaryUOM().getCode());
-            itemTypeModel.setPrimaryUOM(unitOfMeasureModel);
+            primaryUOM = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPrimaryUOM().getCode());
         }
+        itemTypeModel.setPrimaryUOM(primaryUOM);
+        UnitOfMeasureModel secondaryUOM = null;
         if(Objects.nonNull(itemTypeData.getSecondaryUOM()) && itemTypeData.getSecondaryUnitControlled()){
-            var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getSecondaryUOM().getCode());
-            itemTypeModel.setSecondaryUOM(unitOfMeasureModel);
+            secondaryUOM = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getSecondaryUOM().getCode());
         }
+        itemTypeModel.setSecondaryUOM(secondaryUOM);
+        UnitOfMeasureModel packagingUOM = null;
         if(Objects.nonNull(itemTypeData.getPackagingUOM()) && itemTypeData.getPackagingUnitControlled()){
-            var unitOfMeasureModel = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPackagingUOM().getCode());
-            itemTypeModel.setPackagingUOM(unitOfMeasureModel);
+            packagingUOM = unitOfMeasureService.getUnitOfMeasureModel(itemTypeData.getPackagingUOM().getCode());
         }
+        itemTypeModel.setPackagingUOM(packagingUOM);
         modelService.save(itemTypeModel);
     }
 
