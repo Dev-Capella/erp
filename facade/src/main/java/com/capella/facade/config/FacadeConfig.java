@@ -74,6 +74,9 @@ public class FacadeConfig {
         modelMapper.addMappings(new PropertyMap<ProductData, ProductModel>() {
             @Override
             protected void configure() {
+                skip(destination.getPrimaryUOM());
+                skip(destination.getCostUOM());
+                skip(destination.getSecondaryUOM());
                 skip(destination.getManufacturer());
                 skip(destination.getCostCategory());
                 skip(destination.getCostLevel());

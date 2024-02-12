@@ -1,6 +1,7 @@
 package com.capella.domain.model.product;
 
 import com.capella.domain.constant.DomainConstant;
+import com.capella.domain.enums.ConversionFactorType;
 import com.capella.domain.model.composition.CompositionModel;
 import com.capella.domain.model.costcategory.CostCategoryModel;
 import com.capella.domain.model.costlevel.CostLevelModel;
@@ -9,11 +10,12 @@ import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.manufacturer.ManufacturerModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
 import com.capella.domain.model.productsubcodevalue.ProductSubCodeValueModel;
-import com.capella.domain.model.routingitemsubcode.RoutingItemSubCodeModel;
+import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
@@ -31,6 +33,13 @@ public class ProductModel extends CodeBasedModel {
     private String shortText;
 
     private String searchText;
+
+    private BigDecimal conversionFactor;
+
+    private BigDecimal multiplier;
+
+    @Enumerated(EnumType.STRING)
+    private ConversionFactorType conversionFactorType;
 
     private Boolean sellingItem;
 
@@ -59,6 +68,15 @@ public class ProductModel extends CodeBasedModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ItemTypeModel itemType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UnitOfMeasureModel primaryUOM;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UnitOfMeasureModel costUOM;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UnitOfMeasureModel secondaryUOM;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name="products_product_sub_code_values",
