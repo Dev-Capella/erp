@@ -10,6 +10,7 @@ import com.capella.domain.data.product.ProductData;
 import com.capella.domain.data.productiongroup.ProductionGroupData;
 import com.capella.domain.data.user.UserData;
 import com.capella.domain.data.userrole.UserRoleData;
+import com.capella.domain.data.washsymbol.WashSymbolData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
@@ -20,6 +21,7 @@ import com.capella.domain.model.product.ProductModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
 import com.capella.domain.model.user.UserModel;
 import com.capella.domain.model.userrole.UserRoleModel;
+import com.capella.domain.model.washsymbol.WashSymbolModel;
 import com.capella.service.media.MediaService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +30,6 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,7 +38,8 @@ import java.util.Objects;
 @Configuration
 @RequiredArgsConstructor
 public class FacadeConfig {
-    protected  final MediaService mediaService;
+    protected final MediaService mediaService;
+
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
@@ -113,6 +115,12 @@ public class FacadeConfig {
             @Override
             protected void configure() {
                 skip(destination.getPermissions());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<WashSymbolData, WashSymbolModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getWashSymbolCategory());
             }
         });
 

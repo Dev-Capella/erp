@@ -29,5 +29,7 @@ public interface ControllerMappings {
     String ITEMSUBCODECHECKTYPE = "/item-sub-code-check-type";
     String USERAUDIT = "/user-audit";
     String PARAMETER = "/parameter";
+    String WASHSYMBOL = "/wash-symbol";
+    String WASHSYMBOLCATEGORY = "/wash-symbol-category";
 
 }
