@@ -5,6 +5,7 @@ import com.capella.domain.model.currency.CurrencyModel;
 import com.capella.facade.currency.CurrencyFacade;
 import com.capella.service.currency.CurrencyService;
 import com.capella.service.model.ModelService;
+import com.capella.service.util.ServiceUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -25,7 +26,7 @@ public class CurrencyFacadeImpl implements CurrencyFacade {
         CurrencyModel currencyModel;
         if(currencyData.isNew()){
             currencyModel = modelMapper.map(currencyData, CurrencyModel.class);
-            currencyModel.setCode(UUID.randomUUID().toString());
+            ServiceUtils.generateCodeIfMissing(currencyModel);
         }else{
             currencyModel = currencyService.getCurrencyModel(currencyData.getCode());
             modelMapper.map(currencyData, currencyModel);
