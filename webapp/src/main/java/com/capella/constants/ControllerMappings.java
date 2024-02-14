@@ -34,5 +34,6 @@ public interface ControllerMappings {
     String COUNTERTYPE = "/counter-type";
     String COUNTER = "/counter";
     String SUBSERIES = "/sub-series";
+    String CURRENCY = "/currency";
 
 }

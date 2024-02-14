@@ -39,4 +39,5 @@ public interface DomainConstant {
     String COUNTER_TYPE_TABLE_NAME = "countertype";
     String COUNTER_TABLE_NAME = "counter";
     String SUB_SERIES_TABLE_NAME = "subseries";
+    String CURRENCY_TABLE_NAME = "currency";
 }
