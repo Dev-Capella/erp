@@ -1,6 +1,7 @@
 package com.capella.facade.counter.impl;
 
 import com.capella.domain.data.counter.CounterData;
+import com.capella.domain.data.subseries.SubSeriesData;
 import com.capella.domain.model.counter.CounterModel;
 import com.capella.domain.model.countertype.CounterTypeModel;
 import com.capella.facade.counter.CounterFacade;
@@ -58,5 +59,12 @@ public class CounterFacadeImpl implements CounterFacade {
     public void delete(String code) {
         var counterModel = counterService.getCounterModel(code);
         modelService.remove(counterModel);
+    }
+
+    @Override
+    public Set<SubSeriesData> getSubSeriesByCounter(String code) {
+        var counterModel = counterService.getCounterModel(code);
+        var subSeriesModels = counterModel.getSubSeries();
+        return Set.of(modelMapper.map(subSeriesModels, SubSeriesData[].class));
     }
 }

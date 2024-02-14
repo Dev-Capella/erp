@@ -51,4 +51,14 @@ public class CounterController {
         response.setStatus(ProcessStatus.SUCCESS);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.SUBSERIES)
+    public ServiceResponseData getSubSeriesByCounter(@PathVariable String code){
+        log.info("Inside getSubSeriesByCounter of CounterController",code);
+        var subSeriesData = counterFacade.getSubSeriesByCounter(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(subSeriesData);
+        return response;
+    }
 }
