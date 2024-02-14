@@ -32,5 +32,6 @@ public interface ControllerMappings {
     String WASHSYMBOL = "/wash-symbol";
     String WASHSYMBOLCATEGORY = "/wash-symbol-category";
     String COUNTERTYPE = "/counter-type";
+    String COUNTER = "/counter";
 
 }

@@ -1,7 +1,7 @@
 package com.capella.domain.model.countertype;
 
 import com.capella.domain.constant.DomainConstant;
-import com.capella.domain.enums.SubseriesTypeRequired;
+import com.capella.domain.enums.SubSeriesTypeRequired;
 import com.capella.domain.model.extend.CodeBasedModel;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -23,5 +23,5 @@ public class CounterTypeModel extends CodeBasedModel {
     private Boolean defaultCounterAllowed;
     private BigDecimal counterTypeLength;
     @Enumerated(EnumType.STRING)
-    private SubseriesTypeRequired subseriesTypeRequired;
+    private SubSeriesTypeRequired subSeriesTypeRequired;
 }

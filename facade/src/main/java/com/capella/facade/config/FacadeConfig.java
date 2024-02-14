@@ -1,6 +1,7 @@
 package com.capella.facade.config;
 
 import com.capella.domain.data.compositiondetail.CompositionDetailData;
+import com.capella.domain.data.counter.CounterData;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
 import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.manufacturer.ManufacturerData;
@@ -12,6 +13,7 @@ import com.capella.domain.data.user.UserData;
 import com.capella.domain.data.userrole.UserRoleData;
 import com.capella.domain.data.washsymbol.WashSymbolData;
 import com.capella.domain.model.compositiondetail.CompositionDetailModel;
+import com.capella.domain.model.counter.CounterModel;
 import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.manufacturer.ManufacturerModel;
@@ -121,6 +123,12 @@ public class FacadeConfig {
             @Override
             protected void configure() {
                 skip(destination.getWashSymbolCategory());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<CounterData, CounterModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getCounterType());
             }
         });
 
