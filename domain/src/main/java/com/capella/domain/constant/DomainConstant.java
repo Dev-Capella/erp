@@ -36,4 +36,5 @@ public interface DomainConstant {
     String PRODUCT_SUB_CODE_VALUE_TABLE_NAME = "productsubcodevalue";
     String WASH_SYMBOL_TABLE_NAME = "washsymbol";
     String WASH_SYMBOL_CATEGORY_TABLE_NAME = "washsymbolcategory";
+    String COUNTER_TYPE_TABLE_NAME = "countertype";
 }
