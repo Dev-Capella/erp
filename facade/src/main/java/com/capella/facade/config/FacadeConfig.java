@@ -9,6 +9,7 @@ import com.capella.domain.data.media.MediaData;
 import com.capella.domain.data.menu.MenuData;
 import com.capella.domain.data.product.ProductData;
 import com.capella.domain.data.productiongroup.ProductionGroupData;
+import com.capella.domain.data.subseries.SubSeriesData;
 import com.capella.domain.data.user.UserData;
 import com.capella.domain.data.userrole.UserRoleData;
 import com.capella.domain.data.washsymbol.WashSymbolData;
@@ -21,6 +22,7 @@ import com.capella.domain.model.media.MediaModel;
 import com.capella.domain.model.menu.MenuModel;
 import com.capella.domain.model.product.ProductModel;
 import com.capella.domain.model.productiongroup.ProductionGroupModel;
+import com.capella.domain.model.subseries.SubSeriesModel;
 import com.capella.domain.model.user.UserModel;
 import com.capella.domain.model.userrole.UserRoleModel;
 import com.capella.domain.model.washsymbol.WashSymbolModel;
@@ -129,6 +131,12 @@ public class FacadeConfig {
             @Override
             protected void configure() {
                 skip(destination.getCounterType());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<SubSeriesData, SubSeriesModel>() {
+            @Override
+            protected void configure() {
+                skip(destination.getCounter());
             }
         });
 
