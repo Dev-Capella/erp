@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.capella</groupId>
         <artifactId>erp</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>persistence</artifactId>
@@ -21,13 +21,13 @@
         <dependency>
             <groupId>com.capella</groupId>
             <artifactId>base</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${erp.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.capella</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${erp.version}</version>
         </dependency>
 
         <dependency>

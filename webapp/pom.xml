@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.capella</groupId>
         <artifactId>erp</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>webapp</artifactId>
 
@@ -14,12 +14,12 @@
         <dependency>
             <groupId>com.capella</groupId>
             <artifactId>facade</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${erp.version}</version>
         </dependency>
         <dependency>
             <groupId>com.capella</groupId>
             <artifactId>security</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${erp.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>

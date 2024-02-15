@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.capella</groupId>
         <artifactId>erp</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>security</artifactId>
@@ -14,7 +14,7 @@
     <dependency>
         <groupId>com.capella</groupId>
         <artifactId>base</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${erp.version}</version>
     </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,14 +34,8 @@
         </dependency>
         <dependency>
             <groupId>com.capella</groupId>
-            <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.capella</groupId>
             <artifactId>service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${erp.version}</version>
             <scope>compile</scope>
         </dependency>
 
