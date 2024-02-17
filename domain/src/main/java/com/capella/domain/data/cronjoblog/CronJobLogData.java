@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class CronJobLogData extends BaseData {
-    private CronJobStatus status;
+    private CronJobStatus logStatus;
     private String logStatusDescription;
     private Date createdDate;
 }

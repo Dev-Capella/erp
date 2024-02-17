@@ -24,7 +24,7 @@ public class CronJobLogModel extends CodeBasedModel{
     private CronJobModel cronJob;
 
     @Enumerated(EnumType.STRING)
-    private CronJobStatus status;
+    private CronJobStatus logStatus;
 
     @Column(columnDefinition = "TEXT")
     private String logStatusDescription;

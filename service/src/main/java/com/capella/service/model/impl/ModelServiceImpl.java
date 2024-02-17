@@ -20,6 +20,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
@@ -151,6 +152,15 @@ public class ModelServiceImpl implements ModelService {
             throw new ModelRemoveException(errorMessage);
         }
 
+    }
+
+    @Override
+    public <T extends ItemModel> T create(Class<T> tClass) {
+        try {
+            return tClass.getDeclaredConstructor().newInstance();
+        }catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+            throw new ClassCastException();
+        }
     }
 
     protected <T extends ItemModel> void runBeforeInterceptors(T t, Transaction transaction) throws InterceptorException {
