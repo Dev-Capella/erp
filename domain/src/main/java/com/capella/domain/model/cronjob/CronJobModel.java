@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,8 @@ public class CronJobModel extends CodeBasedModel{
     private String searchText;
 
     private String triggerPattern;
+
+    private Date nextExecutionDate;
 
     @Enumerated(EnumType.STRING)
     private CronJobStatus status;
