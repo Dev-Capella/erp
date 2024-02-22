@@ -52,4 +52,14 @@ public class ItemSubCodeCheckTypeController {
         response.setStatus(ProcessStatus.SUCCESS);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE + "/policy")
+    public ServiceResponseData getAllItemSubCodeCheckTypeByPolicy(@PathVariable String code){
+        log.info("Inside getAll of ItemSubCodeCheckTypeController");
+        var itemSubCodeCheckTypeDatas = itemSubCodeCheckTypeFacade.getItemSubCodeCheckTypeByPolicyFacade(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(itemSubCodeCheckTypeDatas);
+        return response;
+    }
 }

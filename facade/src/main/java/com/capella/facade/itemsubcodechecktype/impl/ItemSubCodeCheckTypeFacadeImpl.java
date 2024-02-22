@@ -1,15 +1,22 @@
 package com.capella.facade.itemsubcodechecktype.impl;
 
 import com.capella.domain.data.itemsubcodechecktype.ItemSubCodeCheckTypeData;
+import com.capella.domain.data.itemsubcodechecktype.PLItemSubCodeCheckTypeData;
+import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.model.itemsubcodechecktype.ItemSubCodeCheckTypeModel;
 import com.capella.facade.itemsubcodechecktype.ItemSubCodeCheckTypeFacade;
 import com.capella.service.itemsubcodechecktype.ItemSubCodeCheckTypeService;
 import com.capella.service.model.ModelService;
+import com.capella.service.policy.PolicyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,7 +27,7 @@ public class ItemSubCodeCheckTypeFacadeImpl implements ItemSubCodeCheckTypeFacad
     protected final ModelMapper modelMapper;
     protected final ModelService modelService;
     protected final ItemSubCodeCheckTypeService itemSubCodeCheckTypeService;
-
+    protected final ApplicationContext applicationContext;
     @Override
     public void save(ItemSubCodeCheckTypeData itemSubCodeCheckTypeData) {
         ItemSubCodeCheckTypeModel itemSubCodeCheckTypeModel;
@@ -51,4 +58,24 @@ public class ItemSubCodeCheckTypeFacadeImpl implements ItemSubCodeCheckTypeFacad
         var itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(code);
         modelService.remove(itemSubCodeCheckTypeModel);
     }
+
+    @Override
+    public PLItemSubCodeCheckTypeData getItemSubCodeCheckTypeByPolicyFacade(String code) {
+        var itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(code);
+        PLItemSubCodeCheckTypeData plItemSubCodeCheckTypeData = new PLItemSubCodeCheckTypeData();
+        if(StringUtils.isNotEmpty(itemSubCodeCheckTypeModel.getPolicy())){
+            var policy = itemSubCodeCheckTypeModel.getPolicy();
+            var policyService = (PolicyService) applicationContext.getBean(policy);
+            var result = policyService.invokeAndGetResult(itemSubCodeCheckTypeModel);
+            plItemSubCodeCheckTypeData.setLabel("itemType");
+            plItemSubCodeCheckTypeData.setData(Set.of(modelMapper.map(result, ItemTypeData[].class)));
+            plItemSubCodeCheckTypeData.setItemSubCodeCheckTypeData(modelMapper.map(itemSubCodeCheckTypeModel,ItemSubCodeCheckTypeData.class));
+        }else{
+            plItemSubCodeCheckTypeData.setLabel("itemType");
+            plItemSubCodeCheckTypeData.setData(List.of());
+            plItemSubCodeCheckTypeData.setItemSubCodeCheckTypeData(modelMapper.map(itemSubCodeCheckTypeModel,ItemSubCodeCheckTypeData.class));
+        }
+        return plItemSubCodeCheckTypeData;
+    }
+
 }

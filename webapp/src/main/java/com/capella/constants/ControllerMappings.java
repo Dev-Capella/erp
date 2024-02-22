@@ -36,5 +36,6 @@ public interface ControllerMappings {
     String SUBSERIES = "/sub-series";
     String CURRENCY = "/currency";
     String CRONJOB = "/cron-job";
+    String POLICY = "/policy";
 
 }

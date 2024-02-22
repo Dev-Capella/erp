@@ -11,6 +11,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class ItemSubCodeCheckTypeData extends BaseDescriptionData {
     private String relatedItem;
+
     @Enumerated(EnumType.STRING)
     private CheckType checkType;
+
+    private String policy;
 }
