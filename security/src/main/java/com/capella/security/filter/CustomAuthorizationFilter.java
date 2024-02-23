@@ -2,6 +2,7 @@ package com.capella.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.capella.domain.data.user.JwtUserData;
 import com.capella.service.userrole.UserRoleService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -46,6 +47,9 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 Stream.of(roles).forEach(role -> userRoleService.getUserRoleModel(role).getPermissions()
                         .forEach(p-> authorities.add(new SimpleGrantedAuthority(p.getCode()))));
                 var token = new UsernamePasswordAuthenticationToken(username, null, authorities);
+                var jwtUserData = new JwtUserData();
+                jwtUserData.setJwtId(decodedJWT.getId());
+                token.setDetails(jwtUserData);
                 SecurityContextHolder.getContext().setAuthentication(token);
                 filterChain.doFilter(request,response);
             }catch (Exception exception){

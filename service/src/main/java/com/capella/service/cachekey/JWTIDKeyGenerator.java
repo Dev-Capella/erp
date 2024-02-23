@@ -13,11 +13,9 @@ import java.lang.reflect.Method;
 public class JWTIDKeyGenerator implements KeyGenerator {
 
     protected final UserService userService;
-
-
     @Override
     public Object generate(Object target, Method method, Object... params) {
-        return String.join(ServiceConstant.UNDERSCORE, userService.getCurrentUserJWTId()
-                + userService.getCurrentUser().getUsername());
+        return String.join(ServiceConstant.UNDERSCORE, userService.getCurrentUserJWTId(),
+                userService.getCurrentUser().getUsername());
     }
 }

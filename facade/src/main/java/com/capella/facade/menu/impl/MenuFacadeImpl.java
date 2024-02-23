@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,7 @@ public class MenuFacadeImpl implements MenuFacade {
     protected final PermissionService permissionService;
     protected final UserRoleService userRoleService;
     @Override
+    @CacheEvict(cacheNames = "menuCache", allEntries = true)
     public void save(MenuData menuData) {
         MenuModel menuModel;
         if (menuData.isNew()) {
@@ -108,7 +110,7 @@ public class MenuFacadeImpl implements MenuFacade {
     }
 
     @Override
-    @Cacheable(value = "currentUserMenusCache", key = "JWTIDKeyGenerator")
+    @Cacheable(cacheNames = "menuCache", keyGenerator = "JWTIDKeyGenerator")
     public List<AppMenuData> getCurrentUserMenus() {
         var menus = menuService.getCurrentUserMenus();
         var menuDatas = modelMapper.map(menus, MenuData[].class);
