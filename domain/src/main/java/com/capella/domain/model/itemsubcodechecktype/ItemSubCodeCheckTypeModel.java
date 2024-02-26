@@ -3,11 +3,10 @@ package com.capella.domain.model.itemsubcodechecktype;
 import com.capella.domain.constant.DomainConstant;
 import com.capella.domain.enums.CheckType;
 import com.capella.domain.model.extend.CodeBasedModel;
+import com.capella.domain.model.policycheck.PolicyCheckModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Entity
 @Table(name = DomainConstant.ITEM_SUB_CODE_CHECK_TYPE_TABLE_NAME,
@@ -29,6 +28,7 @@ public class ItemSubCodeCheckTypeModel extends CodeBasedModel {
 
     @Enumerated(EnumType.STRING)
     private CheckType checkType;
-    
-    private String policy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PolicyCheckModel policyCheck;
 }

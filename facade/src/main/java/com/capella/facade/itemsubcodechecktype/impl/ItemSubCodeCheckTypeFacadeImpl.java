@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -62,8 +63,8 @@ public class ItemSubCodeCheckTypeFacadeImpl implements ItemSubCodeCheckTypeFacad
     public PLItemSubCodeCheckTypeData getItemSubCodeCheckTypeByPolicyFacade(String code) {
         var itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(code);
         PLItemSubCodeCheckTypeData plItemSubCodeCheckTypeData = new PLItemSubCodeCheckTypeData();
-        if(StringUtils.isNotEmpty(itemSubCodeCheckTypeModel.getPolicy())){
-            var policy = itemSubCodeCheckTypeModel.getPolicy();
+        if(Objects.nonNull(itemSubCodeCheckTypeModel.getPolicyCheck())){
+            var policy = itemSubCodeCheckTypeModel.getPolicyCheck().getPolicy();
             var policyService = (PolicyService) applicationContext.getBean(policy);
             var result = policyService.invokeAndGetResult(itemSubCodeCheckTypeModel);
             plItemSubCodeCheckTypeData.setLabel("itemType");

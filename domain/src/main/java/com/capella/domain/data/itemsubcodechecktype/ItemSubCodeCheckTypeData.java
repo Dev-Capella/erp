@@ -1,6 +1,7 @@
 package com.capella.domain.data.itemsubcodechecktype;
 
 import com.capella.domain.data.base.BaseDescriptionData;
+import com.capella.domain.data.policycheck.PolicyCheckData;
 import com.capella.domain.enums.CheckType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,5 +16,5 @@ public class ItemSubCodeCheckTypeData extends BaseDescriptionData {
     @Enumerated(EnumType.STRING)
     private CheckType checkType;
 
-    private String policy;
+    private PolicyCheckData policyCheck;
 }
