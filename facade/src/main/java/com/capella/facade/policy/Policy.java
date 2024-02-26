@@ -1,4 +1,4 @@
-package com.capella.service.policy;
+package com.capella.facade.policy;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Indexed;

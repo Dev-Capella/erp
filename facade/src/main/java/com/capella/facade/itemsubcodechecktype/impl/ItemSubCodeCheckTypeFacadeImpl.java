@@ -2,20 +2,19 @@ package com.capella.facade.itemsubcodechecktype.impl;
 
 import com.capella.domain.data.itemsubcodechecktype.ItemSubCodeCheckTypeData;
 import com.capella.domain.data.itemsubcodechecktype.PLItemSubCodeCheckTypeData;
-import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.model.itemsubcodechecktype.ItemSubCodeCheckTypeModel;
+import com.capella.domain.model.policycheck.PolicyCheckModel;
 import com.capella.facade.itemsubcodechecktype.ItemSubCodeCheckTypeFacade;
 import com.capella.service.itemsubcodechecktype.ItemSubCodeCheckTypeService;
 import com.capella.service.model.ModelService;
-import com.capella.service.policy.PolicyService;
+import com.capella.facade.policy.PolicyEvaluate;
+import com.capella.service.policycheck.PolicyCheckService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -27,6 +26,7 @@ public class ItemSubCodeCheckTypeFacadeImpl implements ItemSubCodeCheckTypeFacad
     protected final ModelMapper modelMapper;
     protected final ModelService modelService;
     protected final ItemSubCodeCheckTypeService itemSubCodeCheckTypeService;
+    protected final PolicyCheckService policyCheckService;
     protected final ApplicationContext applicationContext;
     @Override
     public void save(ItemSubCodeCheckTypeData itemSubCodeCheckTypeData) {
@@ -38,6 +38,11 @@ public class ItemSubCodeCheckTypeFacadeImpl implements ItemSubCodeCheckTypeFacad
             itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(itemSubCodeCheckTypeData.getCode());
             modelMapper.map(itemSubCodeCheckTypeData, itemSubCodeCheckTypeModel);
         }
+        PolicyCheckModel policyCheckModel = null;
+        if(Objects.nonNull(itemSubCodeCheckTypeData.getPolicyCheck())){
+            policyCheckModel = policyCheckService.getPolicyCheckModel(itemSubCodeCheckTypeData.getPolicyCheck().getCode());
+        }
+        itemSubCodeCheckTypeModel.setPolicyCheck(policyCheckModel);
         modelService.save(itemSubCodeCheckTypeModel);
     }
 
@@ -62,20 +67,15 @@ public class ItemSubCodeCheckTypeFacadeImpl implements ItemSubCodeCheckTypeFacad
     @Override
     public PLItemSubCodeCheckTypeData getItemSubCodeCheckTypeByPolicyFacade(String code) {
         var itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(code);
-        PLItemSubCodeCheckTypeData plItemSubCodeCheckTypeData = new PLItemSubCodeCheckTypeData();
+
         if(Objects.nonNull(itemSubCodeCheckTypeModel.getPolicyCheck())){
             var policy = itemSubCodeCheckTypeModel.getPolicyCheck().getPolicy();
-            var policyService = (PolicyService) applicationContext.getBean(policy);
-            var result = policyService.invokeAndGetResult(itemSubCodeCheckTypeModel);
-            plItemSubCodeCheckTypeData.setLabel("itemType");
-            plItemSubCodeCheckTypeData.setData(Set.of(modelMapper.map(result, ItemTypeData[].class)));
-            plItemSubCodeCheckTypeData.setItemSubCodeCheckTypeData(modelMapper.map(itemSubCodeCheckTypeModel,ItemSubCodeCheckTypeData.class));
+            var policyEvaluate = (PolicyEvaluate) applicationContext.getBean(policy);
+            return (PLItemSubCodeCheckTypeData) policyEvaluate.invoke();
         }else{
-            plItemSubCodeCheckTypeData.setLabel("itemType");
-            plItemSubCodeCheckTypeData.setData(List.of());
-            plItemSubCodeCheckTypeData.setItemSubCodeCheckTypeData(modelMapper.map(itemSubCodeCheckTypeModel,ItemSubCodeCheckTypeData.class));
+            return null;
         }
-        return plItemSubCodeCheckTypeData;
+
     }
 
 }

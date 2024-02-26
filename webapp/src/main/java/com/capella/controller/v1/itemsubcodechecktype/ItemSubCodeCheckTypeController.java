@@ -53,7 +53,7 @@ public class ItemSubCodeCheckTypeController {
         return response;
     }
 
-    @GetMapping(ControllerMappings.CODE + "/policy")
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.POLICY)
     public ServiceResponseData getAllItemSubCodeCheckTypeByPolicy(@PathVariable String code){
         log.info("Inside getAll of ItemSubCodeCheckTypeController");
         var itemSubCodeCheckTypeDatas = itemSubCodeCheckTypeFacade.getItemSubCodeCheckTypeByPolicyFacade(code);
