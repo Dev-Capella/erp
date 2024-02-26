@@ -13,7 +13,7 @@ import org.springframework.cache.CacheManager;
 @AfterSaveInterceptor(itemType = MenuModel.class)
 public class MenuCacheInterceptor implements Interceptor<MenuModel> {
 
-    protected final CacheManager cacheManager;
+//    protected final CacheManager cacheManager;
     @Override
     public void invoke(MenuModel model) throws InterceptorException {
 

@@ -37,5 +37,7 @@ public interface ControllerMappings {
     String CURRENCY = "/currency";
     String CRONJOB = "/cron-job";
     String POLICY = "/policy";
+    String POLICYCHECK = "/policy-check";
+    String POLICYCHECKCATEGORY = "/policy-check-category";
 
 }

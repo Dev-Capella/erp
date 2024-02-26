@@ -110,7 +110,7 @@ public class MenuFacadeImpl implements MenuFacade {
     }
 
     @Override
-    @Cacheable(cacheNames = "menuCache", keyGenerator = "JWTIDKeyGenerator")
+//    @Cacheable(cacheNames = "menuCache", keyGenerator = "JWTIDKeyGenerator")
     public List<AppMenuData> getCurrentUserMenus() {
         var menus = menuService.getCurrentUserMenus();
         var menuDatas = modelMapper.map(menus, MenuData[].class);

@@ -10,7 +10,6 @@ import com.capella.service.model.ModelService;
 import com.capella.service.policy.PolicyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationContext;

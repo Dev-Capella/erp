@@ -43,4 +43,6 @@ public interface DomainConstant {
     String CRONJOB_TABLE_NAME = "cronjob";
     String CRONJOB_LOG_TABLE_NAME = "cronjoblog";
     String EXCHANGE_RATE_TABLE_NAME = "exchangerate";
+    String POLICY_CHECK_TABLE_NAME = "policycheck";
+    String POLICY_CHECK_CATEGORY_TABLE_NAME = "policycheckcategory";
 }

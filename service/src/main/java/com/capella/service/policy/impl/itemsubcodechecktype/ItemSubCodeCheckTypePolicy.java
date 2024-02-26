@@ -1,6 +1,5 @@
-package com.capella.service.policy.impl;
+package com.capella.service.policy.impl.itemsubcodechecktype;
 
-import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ItemNature;
 import com.capella.domain.model.itemsubcodechecktype.ItemSubCodeCheckTypeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
