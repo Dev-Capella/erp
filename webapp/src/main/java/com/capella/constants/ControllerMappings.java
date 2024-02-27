@@ -39,5 +39,11 @@ public interface ControllerMappings {
     String POLICY = "/policy";
     String POLICYCHECK = "/policy-check";
     String POLICYCHECKCATEGORY = "/policy-check-category";
-
+    String AREA = "/area";
+    String BUSINESSPARTNER = "/business-partner";
+    String COUNTRY = "/country";
+    String MARKET = "/market";
+    String ORDERPARTNER = "/order-partner";
+    String PAYMENTMETHOD = "/payment-method";
+    String TRANSPORTZONE = "/transport-zone";
 }
