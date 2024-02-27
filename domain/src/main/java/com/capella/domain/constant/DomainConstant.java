@@ -45,4 +45,11 @@ public interface DomainConstant {
     String EXCHANGE_RATE_TABLE_NAME = "exchangerate";
     String POLICY_CHECK_TABLE_NAME = "policycheck";
     String POLICY_CHECK_CATEGORY_TABLE_NAME = "policycheckcategory";
+    String COUNTRY_TABLE_NAME = "country";
+    String BUSINESS_PARTNER_TABLE_NAME = "businesspartner";
+    String ORDER_PARTNER_TABLE_NAME = "orderpartner";
+    String MARKET_TABLE_NAME = "market";
+    String AREA_TABLE_NAME = "area";
+    String PAYMENT_METHOD_TABLE_NAME = "paymentmethod";
+    String TRANSPORT_ZONE_TABLE_NAME = "transportzone";
 }
