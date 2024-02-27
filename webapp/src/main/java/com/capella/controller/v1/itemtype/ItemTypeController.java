@@ -93,4 +93,14 @@ public class ItemTypeController {
         response.setData(itemTypeData);
         return response;
     }
+
+    @GetMapping(ControllerMappings.CODE + ControllerMappings.ITEMSUBCODE + ControllerMappings.PRODUCT)
+    public ServiceResponseData getItemSubCodesByItemTypeForProduct(@PathVariable String code){
+        log.info("Inside getItemSubCodesByItemTypeForProduct of ItemTypeController",code);
+        var productItemSubCodeDatas = itemTypeFacade.getItemSubCodesByItemTypeForProduct(code);
+        var response = new ServiceResponseData();
+        response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(productItemSubCodeDatas);
+        return response;
+    }
 }

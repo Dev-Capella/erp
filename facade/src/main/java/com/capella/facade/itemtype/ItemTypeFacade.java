@@ -3,6 +3,7 @@ package com.capella.facade.itemtype;
 import com.capella.domain.data.bomitemsubcode.BoMItemSubCodeData;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
 import com.capella.domain.data.itemtype.ItemTypeData;
+import com.capella.domain.data.productitemsubcode.ProductItemSubCodeData;
 import com.capella.domain.data.qualitylevel.QualityLevelData;
 import com.capella.domain.data.routingitemsubcode.RoutingItemSubCodeData;
 
@@ -17,4 +18,5 @@ public interface ItemTypeFacade {
     Set<QualityLevelData> getQualityLevelsByItemType(String code);
     Set<RoutingItemSubCodeData> getRoutingItemSubCodesByItemType(String code);
     Set<BoMItemSubCodeData> getBoMItemSubCodesByItemType(String code);
+    Set<ProductItemSubCodeData> getItemSubCodesByItemTypeForProduct(String code);
 }

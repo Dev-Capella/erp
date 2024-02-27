@@ -105,7 +105,6 @@ public class FacadeConfig {
             @Override
             protected void configure() {
                 skip(destination.getItemSubCodeCheckType());
-                skip(destination.getUserGenericGroup());
             }
         });
 

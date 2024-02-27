@@ -22,5 +22,5 @@ public class ItemSubCodeData extends BaseDescriptionData {
     private ItemSubCodeType type;
     private ItemTypeData itemType;
     private ItemSubCodeCheckTypeData itemSubCodeCheckType;
-    private UserGenericGroupData userGenericGroup;
+    private String groupTypeCode;
 }

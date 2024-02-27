@@ -3,8 +3,11 @@ package com.capella.facade.itemtype.impl;
 import com.capella.domain.data.bomitemsubcode.BoMItemSubCodeData;
 import com.capella.domain.data.itemsubcode.ItemSubCodeData;
 import com.capella.domain.data.itemtype.ItemTypeData;
+import com.capella.domain.data.productitemsubcode.ProductItemSubCodeData;
 import com.capella.domain.data.qualitylevel.QualityLevelData;
 import com.capella.domain.data.routingitemsubcode.RoutingItemSubCodeData;
+import com.capella.domain.enums.ItemSubCodeType;
+import com.capella.domain.model.itemsubcode.ItemSubCodeModel;
 import com.capella.domain.model.itemtype.ItemTypeModel;
 import com.capella.domain.model.unitofmeasure.UnitOfMeasureModel;
 import com.capella.facade.itemtype.ItemTypeFacade;
@@ -16,9 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -100,5 +105,21 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
         var itemTypeModel = itemTypeService.getItemTypeModel(code);
         var bomItemSubCodes = itemTypeModel.getBomItemSubCodes();
         return Set.of(modelMapper.map(bomItemSubCodes, BoMItemSubCodeData[].class));
+    }
+
+    @Override
+    public Set<ProductItemSubCodeData> getItemSubCodesByItemTypeForProduct(String code) {
+        var itemTypeModel = itemTypeService.getItemTypeModel(code);
+        var primaryItemSubCodes = itemTypeModel.getItemSubCodes().stream()
+                .filter(itemSubCodeModel -> itemSubCodeModel.getType().equals(ItemSubCodeType.PRIMARY))
+                .collect(Collectors.toList());
+        Set<ProductItemSubCodeData> productItemSubCodeDataList = new HashSet<>();
+        for (ItemSubCodeModel itemSubCodeModel : primaryItemSubCodes) {
+            ProductItemSubCodeData productItemSubCodeData = new ProductItemSubCodeData();
+            productItemSubCodeData.setLabel(itemSubCodeModel.getShortText());
+            productItemSubCodeDataList.add(productItemSubCodeData);
+        }
+        return productItemSubCodeDataList;
+
     }
 }

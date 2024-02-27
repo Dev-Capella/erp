@@ -53,6 +53,6 @@ public class ItemSubCodeModel extends CodeBasedModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private ItemSubCodeCheckTypeModel itemSubCodeCheckType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserGenericGroupModel userGenericGroup;
+    private String groupTypeCode;
+
 }

@@ -46,11 +46,6 @@ public class ItemSubCodeFacadeImpl implements ItemSubCodeFacade {
             itemSubCodeCheckTypeModel = itemSubCodeCheckTypeService.getItemSubCodeCheckTypeModel(itemSubCodeData.getItemSubCodeCheckType().getCode());
         }
         itemSubCodeModel.setItemSubCodeCheckType(itemSubCodeCheckTypeModel);
-        UserGenericGroupModel userGenericGroupModel = null;
-        if(Objects.nonNull(itemSubCodeData.getUserGenericGroup())){
-            userGenericGroupModel = userGenericGroupService.getUserGenericGroupModel(itemSubCodeData.getUserGenericGroup().getCode());
-        }
-        itemSubCodeModel.setUserGenericGroup(userGenericGroupModel);
         itemSubCodeModel.setItemType(itemTypeService.getItemTypeModel(itemSubCodeData.getItemType().getCode()));
         modelService.save(itemSubCodeModel);
     }
