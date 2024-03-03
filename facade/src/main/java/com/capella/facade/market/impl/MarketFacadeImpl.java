@@ -22,7 +22,7 @@ public class MarketFacadeImpl implements MarketFacade {
     protected final MarketService marketService;
 
     @Override
-    public void save(MarketData marketData) {
+    public MarketData save(MarketData marketData) {
         MarketModel marketModel;
         if(marketData.isNew()){
             marketModel = modelMapper.map(marketData, MarketModel.class);
@@ -32,6 +32,7 @@ public class MarketFacadeImpl implements MarketFacade {
             modelMapper.map(marketData, marketModel);
         }
         modelService.save(marketModel);
+        return modelMapper.map(marketModel, MarketData.class);
     }
 
     @Override

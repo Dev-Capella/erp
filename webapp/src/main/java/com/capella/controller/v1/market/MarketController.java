@@ -5,10 +5,13 @@ import com.capella.domain.data.market.MarketData;
 import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.market.MarketFacade;
+import com.capella.service.constant.ServiceConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController("marketControllerV1")
 @RequestMapping(ControllerMappings.VERSION_V1 + ControllerMappings.MARKET)
@@ -21,9 +24,10 @@ public class MarketController {
     @PostMapping
     public ServiceResponseData save(@Validated @RequestBody MarketData marketData){
         log.info("Inside save of MarketController",marketData);
-        marketFacade.save(marketData);
+        var data = marketFacade.save(marketData);
         var response = new ServiceResponseData();
         response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(Map.of(ServiceConstant.CODE, data.getCode()));
         return response;
     }
     @GetMapping(ControllerMappings.CODE)

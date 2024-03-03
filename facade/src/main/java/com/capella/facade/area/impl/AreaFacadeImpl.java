@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.awt.geom.Area;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class AreaFacadeImpl implements AreaFacade {
     protected final AreaService areaService;
 
     @Override
-    public void save(AreaData areaData) {
+    public AreaData save(AreaData areaData) {
         AreaModel areaModel;
         if(areaData.isNew()){
             areaModel = modelMapper.map(areaData, AreaModel.class);
@@ -32,6 +33,7 @@ public class AreaFacadeImpl implements AreaFacade {
             modelMapper.map(areaData, areaModel);
         }
         modelService.save(areaModel);
+        return modelMapper.map(areaModel, AreaData.class);
     }
 
     @Override
