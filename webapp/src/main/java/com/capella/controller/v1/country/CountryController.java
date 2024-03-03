@@ -5,10 +5,13 @@ import com.capella.domain.data.country.CountryData;
 import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.country.CountryFacade;
+import com.capella.service.constant.ServiceConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController("countryControllerV1")
 @RequestMapping(ControllerMappings.VERSION_V1 + ControllerMappings.COUNTRY)
@@ -21,9 +24,10 @@ public class CountryController {
     @PostMapping
     public ServiceResponseData save(@Validated @RequestBody CountryData countryData){
         log.info("Inside save of CountryController",countryData);
-        countryFacade.save(countryData);
+        var data = countryFacade.save(countryData);
         var response = new ServiceResponseData();
         response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(Map.of(ServiceConstant.CODE, data.getCode()));
         return response;
     }
     @GetMapping(ControllerMappings.CODE)

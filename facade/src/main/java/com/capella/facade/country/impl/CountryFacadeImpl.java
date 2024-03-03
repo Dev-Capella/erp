@@ -22,7 +22,7 @@ public class CountryFacadeImpl implements CountryFacade {
     protected final CountryService countryService;
 
     @Override
-    public void save(CountryData countryData) {
+    public CountryData save(CountryData countryData) {
         CountryModel countryModel;
         if(countryData.isNew()){
             countryModel = modelMapper.map(countryData, CountryModel.class);
@@ -32,6 +32,7 @@ public class CountryFacadeImpl implements CountryFacade {
             modelMapper.map(countryData, countryModel);
         }
         modelService.save(countryModel);
+        return modelMapper.map(countryModel, CountryData.class);
     }
 
     @Override
