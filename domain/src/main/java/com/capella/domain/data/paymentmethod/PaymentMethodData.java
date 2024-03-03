@@ -7,4 +7,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class PaymentMethodData extends BaseDescriptionData {
+    private Boolean paymentWithBills;
 }

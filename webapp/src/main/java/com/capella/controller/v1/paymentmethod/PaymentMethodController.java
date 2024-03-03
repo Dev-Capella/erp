@@ -5,10 +5,13 @@ import com.capella.domain.data.paymentmethod.PaymentMethodData;
 import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.paymentmethod.PaymentMethodFacade;
+import com.capella.service.constant.ServiceConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController("paymentMethodControllerV1")
 @RequestMapping(ControllerMappings.VERSION_V1 + ControllerMappings.PAYMENTMETHOD)
@@ -21,9 +24,10 @@ public class PaymentMethodController {
     @PostMapping
     public ServiceResponseData save(@Validated @RequestBody PaymentMethodData paymentMethodData){
         log.info("Inside save of PaymentMethodController",paymentMethodData);
-        paymentMethodFacade.save(paymentMethodData);
+        var data = paymentMethodFacade.save(paymentMethodData);
         var response = new ServiceResponseData();
         response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(Map.of(ServiceConstant.CODE, data.getCode()));
         return response;
     }
     @GetMapping(ControllerMappings.CODE)

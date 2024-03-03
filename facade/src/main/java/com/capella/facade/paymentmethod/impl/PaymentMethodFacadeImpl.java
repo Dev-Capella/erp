@@ -22,7 +22,7 @@ public class PaymentMethodFacadeImpl implements PaymentMethodFacade {
     protected final PaymentMethodService paymentMethodService;
 
     @Override
-    public void save(PaymentMethodData paymentMethodData) {
+    public PaymentMethodData save(PaymentMethodData paymentMethodData) {
         PaymentMethodModel paymentMethodModel;
         if(paymentMethodData.isNew()){
             paymentMethodModel = modelMapper.map(paymentMethodData, PaymentMethodModel.class);
@@ -32,6 +32,7 @@ public class PaymentMethodFacadeImpl implements PaymentMethodFacade {
             modelMapper.map(paymentMethodData, paymentMethodModel);
         }
         modelService.save(paymentMethodModel);
+        return modelMapper.map(paymentMethodModel, PaymentMethodData.class);
     }
 
     @Override
