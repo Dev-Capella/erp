@@ -26,7 +26,7 @@ public class TransportZoneFacadeImpl implements TransportZoneFacade {
     protected final TransportZoneService transportZoneService;
 
     @Override
-    public void save(TransportZoneData transportZoneData) {
+    public TransportZoneData save(TransportZoneData transportZoneData) {
         TransportZoneModel transportZoneModel;
         if(transportZoneData.isNew()){
             transportZoneModel = modelMapper.map(transportZoneData, TransportZoneModel.class);
@@ -41,6 +41,7 @@ public class TransportZoneFacadeImpl implements TransportZoneFacade {
         }
         transportZoneModel.setCountry(countryModel);
         modelService.save(transportZoneModel);
+        return modelMapper.map(transportZoneModel, TransportZoneData.class);
     }
 
     @Override

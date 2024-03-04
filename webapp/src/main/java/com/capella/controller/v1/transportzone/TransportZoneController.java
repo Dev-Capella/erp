@@ -5,10 +5,13 @@ import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.data.transportzone.TransportZoneData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.transportzone.TransportZoneFacade;
+import com.capella.service.constant.ServiceConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController("transportZoneControllerV1")
 @RequestMapping(ControllerMappings.VERSION_V1 + ControllerMappings.TRANSPORTZONE)
@@ -21,9 +24,10 @@ public class TransportZoneController {
     @PostMapping
     public ServiceResponseData save(@Validated @RequestBody TransportZoneData transportZoneData){
         log.info("Inside save of TransportZoneController",transportZoneData);
-        transportZoneFacade.save(transportZoneData);
+        var data = transportZoneFacade.save(transportZoneData);
         var response = new ServiceResponseData();
         response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(Map.of(ServiceConstant.CODE, data.getCode()));
         return response;
     }
     @GetMapping(ControllerMappings.CODE)
