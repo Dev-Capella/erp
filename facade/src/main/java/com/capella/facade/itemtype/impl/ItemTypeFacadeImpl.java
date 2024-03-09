@@ -35,7 +35,7 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
     protected final ItemTypeService itemTypeService;
     protected final UnitOfMeasureService unitOfMeasureService;
     @Override
-    public void save(ItemTypeData itemTypeData) {
+    public ItemTypeData save(ItemTypeData itemTypeData) {
         ItemTypeModel itemTypeModel;
         if(itemTypeData.isNew()){
             itemTypeModel = modelMapper.map(itemTypeData, ItemTypeModel.class);
@@ -60,6 +60,7 @@ public class ItemTypeFacadeImpl implements ItemTypeFacade {
         }
         itemTypeModel.setPackagingUOM(packagingUOM);
         modelService.save(itemTypeModel);
+        return modelMapper.map(itemTypeModel, ItemTypeData.class);
     }
 
     @Override

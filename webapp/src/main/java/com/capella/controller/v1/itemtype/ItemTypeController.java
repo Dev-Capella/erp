@@ -5,10 +5,13 @@ import com.capella.domain.data.itemtype.ItemTypeData;
 import com.capella.domain.data.restservice.ServiceResponseData;
 import com.capella.domain.enums.ProcessStatus;
 import com.capella.facade.itemtype.ItemTypeFacade;
+import com.capella.service.constant.ServiceConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController("itemTypeControllerV1")
 @RequestMapping(ControllerMappings.VERSION_V1 + ControllerMappings.ITEMTYPE)
@@ -21,9 +24,10 @@ public class ItemTypeController {
     @PostMapping
     public ServiceResponseData save(@Validated @RequestBody ItemTypeData itemTypeData){
         log.info("Inside save of ItemTypeController",itemTypeData);
-        itemTypeFacade.save(itemTypeData);
+        var data = itemTypeFacade.save(itemTypeData);
         var response = new ServiceResponseData();
         response.setStatus(ProcessStatus.SUCCESS);
+        response.setData(Map.of(ServiceConstant.CODE, data.getCode()));
         return response;
     }
 

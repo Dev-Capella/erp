@@ -10,7 +10,7 @@ import com.capella.domain.data.routingitemsubcode.RoutingItemSubCodeData;
 import java.util.Set;
 
 public interface ItemTypeFacade {
-    void save(ItemTypeData itemTypeData);
+    ItemTypeData save(ItemTypeData itemTypeData);
     Set<ItemTypeData> getAll();
     ItemTypeData get(String code);
     void delete(String code);
